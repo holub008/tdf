@@ -17,13 +17,16 @@ def _precondition_columns(df, required):
             raise ValueError(f'Column {req[0]} has incorrect type ({match.dtype})')
 
 
+def _block_write_method():
+    raise RuntimeError('Cannot modify DAO. If you intend to modify, make a .clone() first')
+
 class StructuredReadOnlyDF(pl.DataFrame):
     """
     provides some semblance of type safety in a dataframe by:
       - checking df columns for name & type
       - disabling most write methods on the df
         - NOTE: using copy-to-modify methods (eg join()) will "eject" the df
-        - if you want to modify the df, .copy() it to eject, then rewrap with `from_df`
+        - if you want to modify the df, .clone() it to eject, then rewrap with `from_df`
       - adding some common sense constraints to the data
     AND, allowing clients to pass around a single type
     """
@@ -32,6 +35,20 @@ class StructuredReadOnlyDF(pl.DataFrame):
         super().__init__(*args, **kwargs)
         _precondition_columns(self, columns)
 
+    # these methods are selected from https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/modify_select.html# as of 2023-11-05
+    # most methods listed there are not in-place, and therefore aren't blocked
+
+    def drop_in_place(self):
+        _block_write_method()
+
+    def insert_at_idx(self):
+        _block_write_method()
+
+    def replace_at_idx(self):
+        _block_write_method()
+
+    def set_sorted(self):
+        _block_write_method()
 
 class Events(StructuredReadOnlyDF):
     @staticmethod
@@ -157,6 +174,7 @@ class IndividualStandings(StructuredReadOnlyDF):
 
         # TODO places are consecutive from 1 to n rows
         # TODO racers are unique
+
 
 class TeamStandings(StructuredReadOnlyDF):
     @staticmethod
