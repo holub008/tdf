@@ -139,6 +139,7 @@ class RawResults(StructuredReadOnlyDF):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         _precondition_columns(self, [
+            ('raw_result_id', pl.INTEGER_DTYPES),
             ('name', pl.Utf8),
             ('first_name', {pl.Utf8}),
             ('last_name', {pl.Utf8}),

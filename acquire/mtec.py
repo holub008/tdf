@@ -23,12 +23,13 @@ def scrape_race(race_id: int) -> RawResults:
     rows = [[cell.text for cell in row.select('.runnersearch-cell')] for row in soup.select('.runnersearch-row')]
 
     data = {col: [row[i] for row in rows] for i, col in enumerate(header)}
+    data['raw_result_id'] = range(1, len(rows) + 1)
     rr = _attach_gender_place(pl.DataFrame(data)).rename({
         'Name': 'name',
         'Sex': 'gender',
         'Age': 'age',
         'City': 'location',
         'Time': 'time',
-    }).select(pl.col('name'), pl.col('gender'), pl.col('age'), pl.col('location'), pl.col('time'), pl.col('gender_place'))
+    }).select(pl.col('raw_result_id'), pl.col('name'), pl.col('gender'), pl.col('age'), pl.col('location'), pl.col('time'), pl.col('gender_place'))
 
     return assimilate_raw_results(rr)
