@@ -20,6 +20,7 @@ def _precondition_columns(df, required):
 def _block_write_method():
     raise RuntimeError('Cannot modify DAO. If you intend to modify, make a .clone() first')
 
+
 class StructuredReadOnlyDF(pl.DataFrame):
     """
     provides some semblance of type safety in a dataframe by:
@@ -50,6 +51,7 @@ class StructuredReadOnlyDF(pl.DataFrame):
     def set_sorted(self):
         _block_write_method()
 
+
 class Events(StructuredReadOnlyDF):
     @staticmethod
     def from_df(df: pl.DataFrame):
@@ -67,7 +69,6 @@ class Events(StructuredReadOnlyDF):
             ('distance', pl.FLOAT_DTYPES)
         ])
 
-        # TODO categorical type? replace enum values?
         techniques_given = set(self.unique('technique').get_column('technique').to_list())
         for tg in techniques_given:
             # will raise an error if not valid
@@ -124,6 +125,29 @@ class TeamMemberships(StructuredReadOnlyDF):
             ('team_id', pl.INTEGER_DTYPES),
         ])
         # TODO unique
+
+
+class RawResults(StructuredReadOnlyDF):
+    """
+    represents results prior to unification with our DB
+    """
+
+    @staticmethod
+    def from_df(df: pl.DataFrame):
+        return RawResults(df.to_dict())
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        _precondition_columns(self, [
+            ('name', pl.Utf8),
+            ('first_name', {pl.Utf8}),
+            ('last_name', {pl.Utf8}),
+            ('gender', {pl.Utf8}),
+            ('age', pl.INTEGER_DTYPES),
+            ('location', {pl.Utf8}),
+            ('gender_place', pl.INTEGER_DTYPES),
+            ('time', pl.FLOAT_DTYPES),
+        ])
 
 
 class MatchedResults(StructuredReadOnlyDF):

@@ -16,7 +16,7 @@ def compute_placement_points(matched_event_results: pl.DataFrame, racer_db: Race
     input df should contain columns `racer_id` and `place`. we will precondition it and vomit if the data looks bad
     :return:
     """
-
+    pass
 
 
 
