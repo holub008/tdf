@@ -34,7 +34,6 @@ class StructuredReadOnlyDF(pl.DataFrame):
 
     def __init__(self, columns, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        _precondition_columns(self, columns)
 
     # these methods are selected from https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/modify_select.html# as of 2023-11-05
     # most methods listed there are not in-place, and therefore aren't blocked

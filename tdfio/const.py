@@ -16,8 +16,8 @@ class Technique(Enum):
 
 
 class Gender(Enum):
-    MALE = auto()
-    FEMALE = auto()
+    male = auto()
+    female = auto()
     NB = auto()
 
     @staticmethod

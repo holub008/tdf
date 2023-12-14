@@ -8,7 +8,7 @@ from dao import RawResults
 
 def _attach_gender_place(df: pl.DataFrame) -> pl.DataFrame:
     return df.with_columns(
-        pl.col('SexPl').str.split('/')[0].cast(pl.Int64).alias('gender_place')
+        (pl.col('SexPl').str.split('/').list.get(0).str.strip()).cast(pl.Int64).alias('gender_place')
     )
 
 

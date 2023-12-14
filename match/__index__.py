@@ -10,8 +10,6 @@ def _process_names_for_matching(df: pl.DataFrame) -> pl.DataFrame:
     )
 
 
-def _make_min_gap(group)
-
 def make_racer_matches(results: RawResults, racers: Racers, event: dict) -> MatchedResults:
 
     results = _process_names_for_matching(results)
