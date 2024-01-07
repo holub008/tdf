@@ -1,15 +1,9 @@
 import acquire.mtec as mtec
 import polars as pl
 
+from orchestrate.s2324 import save_event_df
 from tdfio.const import Gender
 from score import compute_event_points_with_age_advantage
-
-
-def save_event_df(df, g: Gender):
-    pretty_df = df.sort(by='total_event_points', descending=True)
-    pretty_df\
-        .select('gender_place', 'first_name', 'last_name', 'age', 'location', 'age_advantage_event_points')\
-        .write_csv(f'./db/2324/skadi_{g.to_string()}.csv')
 
 
 if __name__ == '__main__':

@@ -12,6 +12,10 @@ def _extract_name_parts(full_name: str) -> tuple:
 
 
 def _attach_name_parts(df: pl.DataFrame) -> pl.DataFrame:
+    cols = df.columns
+    if 'first_name' in cols and 'last_name' in cols:
+        return df
+
     name_parts = df.select(pl.col('name')).map_rows(lambda r: _extract_name_parts(r[0])) \
         .rename({'column_0': 'first_name', 'column_1': 'last_name'})
 
@@ -22,7 +26,10 @@ def _coerce_numerics(df: pl.DataFrame) -> pl.DataFrame:
     numeric_place = df.select(pl.col('gender_place').cast(pl.Int64))
     # convert to seconds
     numeric_time = df.select(pl.col('time')).map_rows(lambda r: pytimeparse.parse(r[0]))
-    numeric_age = df.select(pl.col('age').str.strip().cast(pl.Int64))
+    if df['age'].dtype == pl.Utf8:
+        numeric_age = df.select(pl.col('age').str.strip().cast(pl.Int64))
+    else:
+        numeric_age = df.select(pl.col('age'))
     with_numeric_time = pl.concat([
         df.drop((['gender_place', 'time', 'age'])),
         numeric_place,
