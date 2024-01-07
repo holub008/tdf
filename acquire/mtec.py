@@ -3,7 +3,7 @@ import polars as pl
 from bs4 import BeautifulSoup
 
 from acquire.assimilate import assimilate_raw_results
-from dao import RawResults
+from tdfio.dao import RawResults
 
 
 def _attach_gender_place(df: pl.DataFrame) -> pl.DataFrame:
@@ -28,8 +28,11 @@ def scrape_race(race_id: int) -> RawResults:
         'Name': 'name',
         'Sex': 'gender',
         'Age': 'age',
-        'City': 'location',
+        'City': 'city',
+        'State': 'state',
         'Time': 'time',
-    }).select(pl.col('raw_result_id'), pl.col('name'), pl.col('gender'), pl.col('age'), pl.col('location'), pl.col('time'), pl.col('gender_place'))
+    })\
+        .with_columns(pl.concat_str([pl.col('city').str.strip(), pl.col('state').str.strip()], separator=', ').alias('location'))\
+        .select(pl.col('raw_result_id'), pl.col('name'), pl.col('gender'), pl.col('age'), pl.col('location'), pl.col('time'), pl.col('gender_place'))
 
     return assimilate_raw_results(rr)

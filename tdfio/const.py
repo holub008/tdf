@@ -18,7 +18,7 @@ class Technique(Enum):
 class Gender(Enum):
     male = auto()
     female = auto()
-    NB = auto()
+    nb = auto()
 
     @staticmethod
     def from_string(s: str):
@@ -30,3 +30,11 @@ class Gender(Enum):
             return Gender.NB
         else:
             raise ValueError(f'Unrecognized gender {s}')
+
+    def to_string(self):
+        if self == Gender.male:
+            return 'male'
+        elif self == Gender.female:
+            return 'female'
+        else:
+            return 'nb'
