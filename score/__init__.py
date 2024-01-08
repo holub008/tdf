@@ -50,7 +50,11 @@ def attach_event_incentives(aggregate_results: pl.DataFrame) -> pl.DataFrame:
         elif ar['n_events'] >= 9:
             ei += 25
 
-    aggregate_results = aggregate_results.with_columns(pl.Series(name='event_incentive_points', values=event_incentives))
+        event_incentives.append(ei)
+
+    aggregate_results = aggregate_results.with_columns(
+        pl.Series(name='event_incentive_points', values=event_incentives)
+    )
     return aggregate_results
 
 
@@ -78,10 +82,16 @@ def compute_total_individual_points(
         oc = other.select('first_name', 'last_name', 'age_advantage_event_points')\
             .rename({'age_advantage_event_points': f'{event.to_string()}_points'})
         # we can expect the validation to eventually raise a problem
-        aggregate_results = aggregate_results.join(oc, on=['first_name', 'last_name'], how='left',
-                                                   validate='one_to_one')
+        joined = aggregate_results.join(oc, on=['first_name', 'last_name'], how='outer')
+
+        # validate that we didn't get any multi-joins
+        if not joined.n_unique(subset=['first_name', 'last_name']) == joined.shape[0]:
+            raise ValueError('Data contained a many-1 join on names')
+
+        aggregate_results = joined
 
     total_event_points = []
+    total_n_events = []
     for ar in aggregate_results.iter_rows(named=True):
         n_events = 0
         all_event_points = 0
@@ -93,16 +103,19 @@ def compute_total_individual_points(
                 all_event_points += event_points
 
         total_event_points.append(all_event_points)
+        total_n_events.append(n_events)
 
     aggregate_results = aggregate_results\
-        .with_columns(pl.Series(name='total_event_points', values=total_event_points))
+        .with_columns(
+            pl.Series(name='total_event_points', values=total_event_points),
+            pl.Series(name='n_events', values=total_n_events)
+        )
 
     ar_with_ei = attach_event_incentives(aggregate_results)
-    ar_with_ei.with_columns(
-        pl.col('total_event_points').add(pl.col('event_incentive_points').alias('total_points'))
+    ar_with_ei = ar_with_ei.with_columns(
+        pl.col('total_event_points').add(pl.col('event_incentive_points')).alias('total_points')
     )
     return ar_with_ei
-
 
 
 def compute_team_points():
