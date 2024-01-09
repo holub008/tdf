@@ -1,5 +1,8 @@
 import polars as pl
 
+from orchestrate.s2324 import Event
+from tdfio.const import Gender
+
 
 def compute_age_advantage(rr):
     return rr.with_columns(
@@ -118,5 +121,53 @@ def compute_total_individual_points(
     return ar_with_ei
 
 
-def compute_team_points():
-    pass
+def _compute_event_team_points_within_gender(membership: pl.DataFrame, points: pl.DataFrame, e: Event) -> pl.DataFrame:
+    event_points_column = f'{e.to_string()}_points'
+    joinable_points = points.select([event_points_column, 'first_name', 'last_name'])
+    points_joined_membership = membership.join(joinable_points, on=['first_name', 'last_name'], how='inner')
+
+    if not points_joined_membership.n_unique(['first_name', 'last_name']) == points_joined_membership.shape[0]:
+        raise ValueError('Unexpected multijoin, bad bad bad')
+
+    top_3_scorers_by_team = pl.concat([
+        x.top_k(3, by=event_points_column)
+        for x in points_joined_membership.partition_by('team_name')
+    ])
+    team_scores = top_3_scorers_by_team\
+        .groupby('team_name')\
+        .agg(pl.col(event_points_column).sum().alias(event_points_column))
+
+    return team_scores.select('team_name', event_points_column)
+
+
+def compute_team_points(membership: pl.DataFrame, male_points: pl.DataFrame, female_points: pl.DataFrame, events: list) -> pl.DataFrame:
+    gender_points_by_team = []
+    for g in [Gender.male, Gender.female]:
+        gender_membership = membership.filter(pl.col('gender') == g)
+        gender_points = male_points if g == Gender.male else female_points
+
+        all_gender_points = _compute_event_team_points_within_gender(gender_membership, gender_points, events[0])
+        for e in events[1:]:
+            event_gender_points = _compute_event_team_points_within_gender(gender_membership, gender_points, e)
+            all_gender_points = all_gender_points.join(event_gender_points, on='team_name', how='outer')
+
+        gender_points_by_team.append(all_gender_points)
+
+    magic_suffix = '_female'
+    gpbt_joined = gender_points_by_team[0]\
+        .join(gender_points_by_team[1], on='team_name', how='outer', suffix=magic_suffix)\
+        .fill_null(0)
+    all_event_columns = []
+    for e in events:
+        event_column1 = f'{e.to_string()}_points'
+        all_event_columns.append(event_column1)
+        event_column2 = f'{event_column1}{magic_suffix}'
+        gpbt_joined.with_columns(
+            pl.col(event_column1).add(pl.col(event_column2)).alias(event_column1)
+        )
+
+    return gpbt_joined \
+        .select(['team_name'] + all_event_columns)\
+        .with_columns(pl.sum_horizontal(all_event_columns).alias('total_points'))
+
+
