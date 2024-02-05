@@ -10,6 +10,8 @@ def load_results(e: Event, g: Gender) -> pl.DataFrame:
 
 
 TEAM_NAME_COL = 'Team Name:'
+
+
 def _expand_team_row(r):
     team_name = r[TEAM_NAME_COL]
     name_columns = ['Team captain/representative name:', '2nd team member name', '3rd team member name'] + \
@@ -23,7 +25,7 @@ def _expand_team_row(r):
         gc = gender_columns[i]
         ncv = r.get(nc, None)
         gcv_raw = r.get(gc, None)
-        if ncv and gcv_raw:
+        if ncv and gcv_raw and (ncv.lower() not in ('na', 'n/a')):
             if gcv_raw.lower().startswith('m'):
                 gcv = Gender.male
             elif gcv_raw.lower().startswith('f'):
@@ -36,7 +38,7 @@ def _expand_team_row(r):
                 raise ValueError('Expected each name to contain exactly 1 space to make simple first/last name for matching')
             fn = name_parts[0]
             ln = name_parts[1]
-            member_tups.append([team_name, gcv, fn, ln])
+            member_tups.append([team_name, gcv.to_string(), fn, ln])
 
     return member_tups
 
@@ -47,7 +49,7 @@ def load_team_membership() -> pl.DataFrame:
     if not raw.n_unique(subset=TEAM_NAME_COL) == raw.shape[0]:
         raise ValueError('Expected team name to be unique, crashing out to avoid downstream problems')
 
-    long_team_tups = [_expand_team_row(r) for r in raw.iter_rows(named=True)]
+    long_team_tups = [r2 for r in raw.iter_rows(named=True) for r2 in _expand_team_row(r)]
     membership = pl.DataFrame(long_team_tups, schema=['team_name', 'gender', 'first_name', 'last_name'])
 
     if not membership.n_unique(subset=['first_name', 'last_name']) == membership.shape[0]:

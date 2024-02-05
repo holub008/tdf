@@ -143,7 +143,7 @@ def _compute_event_team_points_within_gender(membership: pl.DataFrame, points: p
 def compute_team_points(membership: pl.DataFrame, male_points: pl.DataFrame, female_points: pl.DataFrame, events: list) -> pl.DataFrame:
     gender_points_by_team = []
     for g in [Gender.male, Gender.female]:
-        gender_membership = membership.filter(pl.col('gender') == g)
+        gender_membership = membership.filter(pl.col('gender') == g.to_string())
         gender_points = male_points if g == Gender.male else female_points
 
         all_gender_points = _compute_event_team_points_within_gender(gender_membership, gender_points, events[0])
@@ -162,7 +162,7 @@ def compute_team_points(membership: pl.DataFrame, male_points: pl.DataFrame, fem
         event_column1 = f'{e.to_string()}_points'
         all_event_columns.append(event_column1)
         event_column2 = f'{event_column1}{magic_suffix}'
-        gpbt_joined.with_columns(
+        gpbt_joined = gpbt_joined.with_columns(
             pl.col(event_column1).add(pl.col(event_column2)).alias(event_column1)
         )
 

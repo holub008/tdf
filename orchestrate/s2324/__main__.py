@@ -39,7 +39,22 @@ def compute_and_write_team_points():
     membership = load_team_membership()
     male_points = compute_all_individual_points(Gender.male)
     female_points = compute_all_individual_points(Gender.female)
-    compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE) \
+    tp = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
+    tp\
+        .sort('total_points', descending=True)\
+        .with_columns(
+            pl.Series(name='Overall Place', values=range(1, tp.shape[0] + 1)),
+            pl.col('skadischase_points').round(2).alias('skadischase_points'),
+            pl.col('firstchance_points').round(2).alias('firstchance_points'),
+            pl.col('total_points').round(2).alias('total_points'),
+        )\
+        .rename({
+            'team_name': 'Team Name',
+            'skadischase_points': "Skadi's Chase Points",
+            'firstchance_points': 'First Chance Points',
+            'total_points': 'Total Points'
+        })\
+        .select('Team Name', 'Overall Place', "Skadi's Chase Points", "First Chance Points", 'Total Points')\
         .write_csv(f'orchestrate/s2324/tdf_team_standings.csv')
 
 
