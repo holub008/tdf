@@ -46,6 +46,8 @@ def _assimilate_gender(df: pl.DataFrame) -> pl.DataFrame:
                            .then(Gender.male.name)
                            .when(pl.col('gender').str.to_lowercase().str.strip().str.starts_with('f'))
                            .then(Gender.female.name)
+                           .when(pl.col('gender').str.to_lowercase().str.strip().str.starts_with('n'))
+                           .then(Gender.nb.name)
                            .otherwise(None)
                            .alias("gender"))
 

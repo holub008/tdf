@@ -68,8 +68,8 @@ def compute_total_individual_points(
     if not len(event_results) == len(events):
         raise ValueError('events and results must match in length')
 
-    if len(event_results) < 2:
-        raise ValueError('must supply 2 or more ')
+    if len(event_results) < 1:
+        raise ValueError('must supply 1 or more ')
 
     aggregate_results = event_results[0]
     aggregate_results = aggregate_results\
