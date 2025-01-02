@@ -6,6 +6,7 @@ from tdfio.const import Gender
 
 class Event(Enum):
     skadischase = auto()
+    hiihto = auto()
 
     def to_string(self) -> str:
         return self.name

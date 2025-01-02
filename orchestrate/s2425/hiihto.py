@@ -8,8 +8,8 @@ from score import compute_event_points_with_age_advantage
 
 
 if __name__ == '__main__':
-    unparsed = mtec.scrape_race(17977)
+    unparsed = scrape_hiihto()
 
     for gender in [Gender.male, Gender.female]:
         up = compute_event_points_with_age_advantage(unparsed.filter(pl.col('gender') == gender.to_string()))
-        Event.skadischase.save_df(up, gender)
+        Event.hiihto.save_df(up, gender)

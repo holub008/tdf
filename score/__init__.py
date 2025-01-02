@@ -6,7 +6,7 @@ from tdfio.const import Gender
 
 def compute_age_advantage(rr):
     return rr.with_columns(
-        pl.when(pl.col('age') <= 45)
+        pl.when(pl.col('age').is_null() | pl.col('age') <= 45)
         .then(0.0)
         .otherwise(pl.col('age').sub(45.0))
         .alias('age_advantage')
