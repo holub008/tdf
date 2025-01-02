@@ -18,11 +18,15 @@ def scrape_race(race_id: int) -> RawResults:
     res = requests.get('https://www.mtecresults.com/race/quickResults',
                             # who knows what max perPage the server will allow, but 500 should be good for most races
                             params={'raceid': str(race_id), 'version': '31', 'overall': 'yes', 'perPage': '500'},
-                            headers={'X-Requested-With': 'XMLHttpRequest'})
+                            headers={
+                                'X-Requested-With': 'XMLHttpRequest',
+                                # mtec uses cloudfront, which seems to be configured with minimal UA checking
+                                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+                            })
     soup = BeautifulSoup(res.text, 'html.parser')
 
-    header = [cell.text for cell in soup.select('.runnersearch-header-cell')]
-    rows = [[cell.text for cell in row.select('.runnersearch-cell')] for row in soup.select('.runnersearch-row')]
+    header = [cell.text for cell in soup.select('thead tr th')]
+    rows = [[cell.text.strip() for cell in row.select('td')] for row in soup.select('tbody tr')]
 
     data = {col: [row[i] for row in rows] for i, col in enumerate(header)}
     data['raw_result_id'] = range(1, len(rows) + 1)
