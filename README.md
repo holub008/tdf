@@ -33,5 +33,9 @@ This project is set up to run & be modified on two periods:
 
 Seasons are denoted in how data is `acquire/`d, `orchestrate/`d, and placed in a `db/`, looking like `s2425`.
 
-Typically, each race week will require the creation of a new `acquire/` script
+Typically, each race week will require the creation of:
 
+- a new `acquire/` script, which retrieves/constructs a `RawResults` object
+- an `orchestrate/` script, which computes points for the event and places it into the `db/`
+    - the resulting file in `db/` will occassionally need to be edited by hand when there are name conflicts or other problems 
+- the addition of the event to `orchestrate/season/__main__.py`
