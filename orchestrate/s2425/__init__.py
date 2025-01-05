@@ -7,6 +7,7 @@ from tdfio.const import Gender
 class Event(Enum):
     skadischase = auto()
     hiihto = auto()
+    firstchance = auto()
 
     def to_string(self) -> str:
         return self.name
@@ -15,6 +16,10 @@ class Event(Enum):
     def from_string(s: str):
         if s == 'skadischase':
             return Event.skadischase
+        elif s == 'hiihto':
+            return Event.hiihto
+        elif s == 'firstchance':
+            return Event.firstchance
 
         raise ValueError(f'Unrecognized event string representation {s}')
 

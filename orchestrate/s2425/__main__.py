@@ -4,7 +4,7 @@ from orchestrate.s2425 import Event
 from score import compute_total_individual_points
 from tdfio.const import Gender
 
-EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto]
+EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance]
 
 
 def compute_all_individual_points(g: Gender):
@@ -18,7 +18,7 @@ def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
         .sort('total_points', descending=True)
 
-    for rc in ['skadischase_points', 'hiihto_points']:
+    for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points']:
         if rc not in aip.columns:
             aip = aip.with_columns(pl.lit(0.0).alias(rc))
         else:
@@ -32,14 +32,17 @@ def compute_and_write_all_individual_points(g: Gender):
         .rename({
         'skadischase_points': "Skadi's Chase Points",
         'hiihto_points': 'Hiihto Relay Points',
+        'firstchance_points': 'First Chance Points',
         'total_points': 'Total Points',
         'n_events': 'Number of Events',
     }) \
         .select('Name', 'Overall Place', 'Number of Events',
                 "Skadi's Chase Points", 'Hiihto Relay Points',
+                'First Chance Points',
                 'Total Points') \
         .fill_null(0) \
         .write_csv(f'orchestrate/s2425/tdf_individual_{g.to_string()}_standings.csv')
+
 
 if __name__ == '__main__':
     compute_and_write_all_individual_points(Gender.female)

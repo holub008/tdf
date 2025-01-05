@@ -30,7 +30,10 @@ MIXED_NAME_TO_GENDER = {
     'Emily Broderson': 'female',
     'Gregory Pupillo': 'male',
     'Jackie Montpetit': 'female',
+    'Taylor Fay': 'male',
+    'Emily Muellner': 'female'
 }
+
 
 def stretch_class_results(class_wide_df: pl.DataFrame) -> pl.DataFrame:
     # EP seems to have bastardized their own system for first name = first racer, last name = second
@@ -41,7 +44,7 @@ def stretch_class_results(class_wide_df: pl.DataFrame) -> pl.DataFrame:
     if is_mixed:
         return pl.concat([set1, set2]).rename({
             'Total Time': 'time',
-        }).with_columns(pl.col('name').apply(lambda n: MIXED_NAME_TO_GENDER[n]).alias('gender')).select('name', 'time', 'gender')
+        }).with_columns(pl.col('name').map_dict(MIXED_NAME_TO_GENDER).alias('gender')).select('name', 'time', 'gender')
     else:
         gender = 'male' if class_wide_df['Class'][0] == 'Male' else 'female'
         return pl.concat([set1, set2]).rename({
@@ -60,7 +63,10 @@ def stretch_relay_teams(wide_df: pl.DataFrame) -> pl.DataFrame:
     each row corresponds to two racers
     mixed teams get sorted into their respective genders
     """
-    stretched = wide_df.groupby('Class').map_groups(lambda g: stretch_class_results(g))
+    wide_df_corrected = wide_df.with_columns(
+        pl.when((pl.col('Class') == 'Female') & (pl.col('First Name') == 'Taylor Fay &'))
+        .then('Mixed').otherwise(pl.col('Class')).alias('Class'))
+    stretched = wide_df_corrected.groupby('Class').map_groups(lambda g: stretch_class_results(g))
     out = []
     for g in ['male', 'female']:
         matches = stretched.filter(pl.col('gender').eq(g))
@@ -79,7 +85,6 @@ def scrape_hiihto() -> RawResults:
     data = {col: [row[i] for row in rows] for i, col in enumerate(header)}
     wide_df = pl.DataFrame(data)
     rr = stretch_relay_teams(wide_df).with_columns(pl.lit(None).alias('age'))
-    print(rr)
 
     return assimilate_raw_results(rr)
 

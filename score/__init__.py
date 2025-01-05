@@ -6,7 +6,7 @@ from tdfio.const import Gender
 
 def compute_age_advantage(rr):
     return rr.with_columns(
-        pl.when(pl.col('age').is_null() | pl.col('age') <= 45)
+        pl.when(pl.col('age').is_null() | (pl.col('age') <= 45))
         .then(0.0)
         .otherwise(pl.col('age').sub(45.0))
         .alias('age_advantage')
@@ -26,6 +26,7 @@ def compute_event_points_with_age_advantage(gender_raw_results: pl.DataFrame) ->
     )
 
     waa = compute_age_advantage(rrp_floored)
+    print(waa)
     # no event incentives for the first event!
     fpp = waa.with_columns(
         pl.col('floored_placement_points').add(pl.col('age_advantage')).alias('total_event_points')

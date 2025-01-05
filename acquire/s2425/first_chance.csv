@@ -1,0 +1,67 @@
+Place,Bib,Name,First name,Last name,Team name,Distance,Age,Gender,Time
+1,2095,Mitchell Campbell,Mitchell,Campbell,"Minneapolis, MN",10km,32,Male,23:46.0
+2,2094,Paul Olson,Paul,Olson,,10km,,Male,23:46.8
+3,6537,Louis Sirota,Louis,Sirota,"Minneapolis, MN",10km,36,Male,23:58.2
+4,6547,Erik Hendrickson,Erik,Hendrickson,"St. Louis Park, MN",10km,39,Male,24:01.4
+5,6528,Craig Cardinal,Craig,Cardinal,"Northfield, MN",10km,42,Male,24:25.0
+6,2088,Karl Holub,Karl,Holub,"New Brighton, MN",10km,31,Male,24:48.0
+7,6573,Ron Omann,Ron,Omann,"Afton, MN",10km,49,Male,25:06.2
+8,6536,Josh Doebbert,Josh,Doebbert,,10km,,,25:28.6
+9,6508,Dennis Curran,Dennis,Curran,"Plymouth, MN",10km,42,Male,25:29.4
+10,6534,Kevin Johnson,Kevin,Johnson,"Saint Paul, MN",10km,45,Male,25:37.1
+11,6596,Ben Mullin,Ben,Mullin,"Lindstrom, MN",10km,,Male,26:07.4
+12,2091,Carter Scheele,Carter,Scheele,"Saint Cloud, MN",10km,,Male,26:12.6
+13,6524,Chad Korby,Chad,Korby,"Minneapolis, MN",10km,,Male,26:19.0
+14,6599,Artie Huber,Artie,Huber,"Otsego, MN",10km,50,Male,26:19.9
+15,6531,Brock Lundberg,Brock,Lundberg,"Hudson, WI",10km,49,Male,26:29.8
+16,6581,Matt Peterson,Matt,Peterson,"Minnetonka, MN",10km,43,Male,26:53.2
+17,6526,Lisa Garretson,Lisa,Garretson,"Saint Paul, MN",10km,35,Female,26:57.8
+18,6598,Erica Kazin,Erica,Kazin,"Maple Plain, MN",10km,18,Female,27:07.9
+19,6612,Emma Jamison,Emma,Jamison,"Saint Cloud, MN",10km,,Female,27:14.5
+20,6606,Paul Schoening,Paul,Schoening,"Osseo, MN",10km,59,Male,27:15.3
+21,6539,Mary Beth Tuttle,Mary Beth,Tuttle,"Pine Springs, MN",10km,61,Female,27:16.0
+22,6649,Jacob Kjome,Jacob,Kjome,"Osseo, MN",10km,,Male,27:18.7
+23,6533,Kathryn Pintar,Kathryn,Pintar,"Minneapolis, MN",10km,30,Female,27:21.7
+24,2089,Gabriella Haire,Gabriella,Haire,"Minneapolis, MN",10km,27,Female,27:22.6
+25,6605,Anna Peikert,Anna,Peikert,"Rochester, MN",10km,18,Female,27:31.6
+26,2092,Zeb Reicher,Zeb,Reicher,"Sauk Rapids, MN",10km,35,Male,28:13.8
+27,6584,Michael Hall,Michael,Hall,"Lino Lakes, MN",10km,,Male,28:14.5
+28,6611,Allie Rykken,Allie,Rykken,"Saint Paul, MN",10km,36,Female,28:22.3
+29,6535,Emily Fjorden,Emily,Fjorden,"Minneapolis, MN",10km,31,Female,28:37.6
+29,6586,Julie Garretson,Julie,Garretson,"Minneapolis, MN",10km,34,Female,28:37.6
+31,2085,Paige Larson,Paige,Larson,"Mora, MN",10km,28,Female,28:42.8
+32,2086,Adam Lee,Adam,Lee,"Princeton, MN",10km,,Male,28:47.6
+33,2032,Jacob Lee,Jacob,Lee,"Princeton, MN",10km,,Male,29:10.4
+34,6530,Lydia Knight,Lydia,Knight,"Sartell, MN",10km,18,Female,29:40.3
+35,6538,David Christopherson,David,Christopherson,"St Anthony, MN",10km,74,Male,30:26.2
+36,6602,Dakota Harris,Dakota,Harris,"Mora, MN",10km,17,Male,30:27.5
+37,6532,John Rock,John,Rock,"Arden Hills, MN",10km,60,Male,30:50.5
+38,6614,Cheryl Dubois,Cheryl,DuBois,"North Oaks, MN",10km,63,Female,31:05.4
+39,6604,Sophia Peikert,Sophia,Peikert,"Rochester, MN",10km,15,Female,31:15.7
+40,6610,Thomas Linden,Thomas,Linden,"Hinckley, MN",10km,39,Male,31:47.3
+41,6601,Victoria Ranua,Victoria,Ranua,"Shakopee, MN",10km,44,Female,32:52.8
+42,6527,Michael Sweet,Michael,Sweet,"Saint Paul, MN",10km,66,Male,33:23.7
+43,6595,Eva Reinicke,Eva,Reinicke,"Northfield, MN",10km,39,Female,33:58.1
+44,6575,Richard Kyle,RICHARD,KYLE,"Saint Paul, MN",10km,62,Male,34:03.3
+45,6577,John Linden,John,Linden,"Finlayson, MN",10km,64,Male,35:24.2
+46,6603,Aaron Winger,Aaron,Winger,"Mora, MN",10km,14,Male,35:34.7
+47,2081,Abigail Lee,Abigail,Lee,"Princeton, MN",10km,,Female,35:37.1
+48,2082,Keith Egan,Keith,Egan,"White Bear Township, MN",10km,38,Male,35:40.5
+49,6582,Daniel Mackala,Daniel,Mackala,"Saint Paul, MN",10km,,Male,36:36.3
+50,2090,Linda Evert,Linda,Evert,"Minneapolis, MN",10km,,Female,39:45.5
+51,6600,Amy Lee,Amy,Lee,"Champlin, MN",10km,50,Female,40:29.4
+52,6578,Katie Schaaf,Katie,Schaaf,"Minneapolis, MN",10km,49,Female,43:06.7
+53,6507,Mary Gunderson,Mary,Gunderson,"Mora, MN",10km,13,Female,43:21.8
+54,6594,Benjamin Bauer,Benjamin,Bauer,"Mora, MN",10km,14,Male,43:52.6
+55,6608,Esther Heuton,Esther,Heuton,"Rochester, MN",10km,15,Female,44:10.2
+56,6613,Anna Patenaude,Anna,Patenaude,"Mora, MN",10km,37,Female,44:13.8
+57,2083,Isabella Schimp,Isabella,Schimp,"Blaine, MN",10km,14,Female,44:34.2
+58,2084,Jeremiah Schimp,Jeremiah,Schimp,"Blaine, MN",10km,45,Male,44:35.2
+59,6529,Ellen Birch,Ellen,Birch,"Minneapolis, MN",10km,59,Female,44:43.9
+60,6642,Aaron Gunderson,Aaron,Gunderson,"Mora, MN",10km,43,Male,46:23.2
+61,2087,Chris Reicher,Chris,Reicher,"Sauk Rapids, MN",10km,72,Male,48:11.7
+62,6597,Jim Anderson,Jim,Anderson,"Cable, WI",10km,,Male,49:54.6
+63,6525,Greg Zophy,Greg,Zophy,"Saint Paul, MN",10km,68,Male,50:44.7
+64,6589,James Mostek,James,Mostek,"Finlayson, MN",10km,,Male,51:46.1
+65,6607,Unknown FC1,Unknown,FC1,,10km,,,59:57.2
+66,2093,Wayne Komarek,Wayne,Komarek,"Minneapolis, MN",10km,,Male,1:11:07.8
