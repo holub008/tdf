@@ -26,7 +26,6 @@ def compute_event_points_with_age_advantage(gender_raw_results: pl.DataFrame) ->
     )
 
     waa = compute_age_advantage(rrp_floored)
-    print(waa)
     # no event incentives for the first event!
     fpp = waa.with_columns(
         pl.col('floored_placement_points').add(pl.col('age_advantage')).alias('total_event_points')

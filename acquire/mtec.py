@@ -40,5 +40,4 @@ def scrape_race(race_id: int) -> RawResults:
     })\
         .with_columns(pl.concat_str([pl.col('city').str.strip(), pl.col('state').str.strip()], separator=', ').alias('location'))\
         .select(pl.col('raw_result_id'), pl.col('name'), pl.col('gender'), pl.col('age'), pl.col('location'), pl.col('time'), pl.col('gender_place'))
-
     return assimilate_raw_results(rr)

@@ -8,6 +8,7 @@ class Event(Enum):
     skadischase = auto()
     hiihto = auto()
     firstchance = auto()
+    ll_challenge = auto()
 
     def to_string(self) -> str:
         return self.name
@@ -20,6 +21,8 @@ class Event(Enum):
             return Event.hiihto
         elif s == 'firstchance':
             return Event.firstchance
+        elif s == 'll_challenge':
+            return Event.ll_challenge
 
         raise ValueError(f'Unrecognized event string representation {s}')
 
