@@ -1,6 +1,7 @@
 import polars as pl
 
-from orchestrate.s2324 import Event
+# TODO this is awkward, have to update the definition each season
+from orchestrate.s2425 import Event
 from tdfio.const import Gender
 
 
@@ -123,7 +124,7 @@ def compute_total_individual_points(
 
 def _compute_event_team_points_within_gender(membership: pl.DataFrame, points: pl.DataFrame, e: Event) -> pl.DataFrame:
     event_points_column = f'{e.to_string()}_points'
-    joinable_points = points.select([event_points_column, 'first_name', 'last_name'])
+    joinable_points = points.select([event_points_column, 'first_name', 'last_name']).drop_nulls([event_points_column])
     points_joined_membership = membership.join(joinable_points, on=['first_name', 'last_name'], how='inner')
 
     if not points_joined_membership.n_unique(['first_name', 'last_name']) == points_joined_membership.shape[0]:
@@ -133,6 +134,7 @@ def _compute_event_team_points_within_gender(membership: pl.DataFrame, points: p
         x.top_k(3, by=event_points_column)
         for x in points_joined_membership.partition_by('team_name')
     ])
+
     team_scores = top_3_scorers_by_team\
         .groupby('team_name')\
         .agg(pl.col(event_points_column).sum().alias(event_points_column))
@@ -142,7 +144,7 @@ def _compute_event_team_points_within_gender(membership: pl.DataFrame, points: p
 
 def compute_team_points(membership: pl.DataFrame, male_points: pl.DataFrame, female_points: pl.DataFrame, events: list) -> pl.DataFrame:
     gender_points_by_team = []
-    for g in [Gender.male, Gender.female]:
+    for g in [Gender.female, Gender.male]:
         gender_membership = membership.filter(pl.col('gender') == g.to_string())
         gender_points = male_points if g == Gender.male else female_points
 

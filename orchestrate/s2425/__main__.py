@@ -1,10 +1,10 @@
 import polars as pl
-from db.s2425 import load_results
+from db.s2425 import load_results, load_team_membership
 from orchestrate.s2425 import Event
-from score import compute_total_individual_points
+from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
 
-EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance]
+EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance, Event.ll_challenge]
 
 
 def compute_all_individual_points(g: Gender):
@@ -18,7 +18,7 @@ def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
         .sort('total_points', descending=True)
 
-    for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points']:
+    for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points', 'll_challenge_points']:
         if rc not in aip.columns:
             aip = aip.with_columns(pl.lit(0.0).alias(rc))
         else:
@@ -33,17 +33,48 @@ def compute_and_write_all_individual_points(g: Gender):
         'skadischase_points': "Skadi's Chase Points",
         'hiihto_points': 'Hiihto Relay Points',
         'firstchance_points': 'First Chance Points',
+        'll_challenge_points': 'LL Challenge Points',
         'total_points': 'Total Points',
         'n_events': 'Number of Events',
     }) \
         .select('Name', 'Overall Place', 'Number of Events',
                 "Skadi's Chase Points", 'Hiihto Relay Points',
-                'First Chance Points',
+                'First Chance Points', 'LL Challenge Points',
                 'Total Points') \
         .fill_null(0) \
         .write_csv(f'orchestrate/s2425/tdf_individual_{g.to_string()}_standings.csv')
 
 
+def compute_and_write_team_points():
+    membership = load_team_membership()
+    male_points = compute_all_individual_points(Gender.male)
+    female_points = compute_all_individual_points(Gender.female)
+    tp = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
+    tp\
+        .sort('total_points', descending=True)\
+        .with_columns(
+            pl.Series(name='Overall Place', values=range(1, tp.shape[0] + 1)),
+            pl.col('skadischase_points').round(2).alias('skadischase_points'),
+            pl.col('hiihto_points').round(2).alias('hiihto_points'),
+            pl.col('firstchance_points').round(2).alias('firstchance_points'),
+            pl.col('ll_challenge_points').round(2).alias('ll_challenge_points'),
+            pl.col('total_points').round(2).alias('total_points'),
+        )\
+        .rename({
+            'team_name': 'Team Name',
+            'skadischase_points': "Skadi's Chase Points",
+            'hiihto_points': "Hiihto Points",
+            'firstchance_points': 'First Chance Points',
+            'll_challenge_points': 'LL Challenge Points',
+            'total_points': 'Total Points'
+        })\
+        .select('Team Name', 'Overall Place',
+                "Skadi's Chase Points", "Hiihto Points", "First Chance Points", "LL Challenge Points",
+                'Total Points')\
+        .write_csv(f'orchestrate/s2425/tdf_team_standings.csv')
+
+
 if __name__ == '__main__':
     compute_and_write_all_individual_points(Gender.female)
     compute_and_write_all_individual_points(Gender.male)
+    compute_and_write_team_points()
