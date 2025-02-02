@@ -28,7 +28,7 @@ def _coerce_numerics(df: pl.DataFrame) -> pl.DataFrame:
     numeric_time = df.select(pl.col('time')).map_rows(lambda r: pytimeparse.parse(r[0]))
     numeric_time.columns = ['time']
     if df['age'].dtype == pl.Utf8:
-        numeric_age = df.select(pl.col('age').str.strip().cast(pl.Int64))
+        numeric_age = df.select(pl.col('age').str.strip().cast(pl.Int64, strict=False))
     else:
         numeric_age = df.select(pl.col('age'))
     with_numeric_time = pl.concat([

@@ -10,6 +10,7 @@ class Event(Enum):
     firstchance = auto()
     ll_challenge = auto()
     mount_ashwabay = auto()
+    coll = auto()
 
     def to_string(self) -> str:
         return self.name
