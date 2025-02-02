@@ -9,6 +9,7 @@ class Event(Enum):
     hiihto = auto()
     firstchance = auto()
     ll_challenge = auto()
+    mount_ashwabay = auto()
 
     def to_string(self) -> str:
         return self.name
@@ -23,11 +24,13 @@ class Event(Enum):
             return Event.firstchance
         elif s == 'll_challenge':
             return Event.ll_challenge
+        elif s == 'ashwabay':
+            return Event.ashwabay
 
         raise ValueError(f'Unrecognized event string representation {s}')
 
     def save_df(self, df: pl.DataFrame, g: Gender):
-        pretty_df = df.sort(by='total_event_points', descending=True)
+        pretty_df = df.sort(by='age_advantage_event_points', descending=True)
         selections = ['gender_place', 'first_name', 'last_name', 'age', 'age_advantage_event_points']
         if 'location' in df.columns:
             selections.append('location')
@@ -35,3 +38,7 @@ class Event(Enum):
         pretty_df\
             .select(selections)\
             .write_csv(f'./db/s2425/{self.to_string()}_{g.to_string()}.csv')
+
+
+NON_MAIN_RACE_POINTS = 20.0
+NON_MAIN_EVENT_SPOOF = 999

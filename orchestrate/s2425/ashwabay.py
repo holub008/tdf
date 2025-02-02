@@ -1,0 +1,25 @@
+from acquire.s2425.ashwabay import get_results
+from orchestrate.s2425 import Event, NON_MAIN_RACE_POINTS, NON_MAIN_EVENT_SPOOF
+from score import compute_event_points_with_age_advantage
+from tdfio.const import Gender
+import polars as pl
+
+
+if __name__ == '__main__':
+    main_results = get_results()
+    nonmain_results = get_results(True)
+
+    for gender in [Gender.male, Gender.female]:
+        main_points = compute_event_points_with_age_advantage(main_results.filter(pl.col('gender') == gender.to_string()))
+        nmr_gender = nonmain_results.filter(pl.col('gender').eq(gender.name))
+        # new in 24/25, non-main event participants also receive points
+        nonmain_points = pl.DataFrame({
+            'first_name': nmr_gender['first_name'],
+            'last_name': nmr_gender['last_name'],
+            'gender': gender.name,
+            'gender_place': NON_MAIN_EVENT_SPOOF,
+            'age': NON_MAIN_EVENT_SPOOF,
+            'age_advantage_event_points': NON_MAIN_RACE_POINTS,
+        })
+
+        Event.mount_ashwabay.save_df(pl.concat([main_points.select(['first_name', 'last_name', 'gender', 'gender_place', 'age', 'age_advantage_event_points']), nonmain_points]), gender)
