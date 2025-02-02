@@ -16,7 +16,7 @@ def compute_all_individual_points(g: Gender):
 
 def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
-        .sort('total_points', descending=True)
+        .sort(['total_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
 
     for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points', 'll_challenge_points', 'mount_ashwabay_points']:
         if rc not in aip.columns:
