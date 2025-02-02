@@ -1,0 +1,63 @@
+Place,DivPl,Bib,Name,Age,Sex,City,State,Time,Pace
+1,1/12,630,Louis Sirota,36,M,Minneapolis,MN,1:30:03,3:01
+2,2/12,481,Mitchell Campbell,32,M,Minneapolis,MN,1:30:04,3:01
+3,3/12,631,Karl Holub,31,M,New Brighton,MN,1:30:33,3:02
+4,1/7,629,Josh Albrecht,25,M,Stillwater,MN,1:30:34,3:02
+5,4/12,443,Spencer Davis,32,M,Minneapolis,MN,1:30:44,3:02
+6,2/7,424,Ian Wright,29,M,Minneapolis,MN,1:33:48,3:08
+7,1/5,429,Craig Cardinal,42,M,Northfield,MN,1:33:51,3:08
+8,3/7,446,Tyler Gilbert,29,M,Minneapolis,MN,1:34:52,3:10
+9,5/12,250,Eli Rassler,31,M,Duluth,MN,1:36:31,3:13
+10,4/7,456,Emmett Donohue,23,M,Saint Paul,MN,1:36:40,3:14
+11,5/7,392,Eric Patterson,26,M,Duluth,MN,1:36:41,3:14
+12,6/12,469,Dominic Beckman,34,M,Ironwood,MI,1:37:39,3:16
+13,2/5,419,Joseph Altendahl,43,M,Saint Paul,MN,1:38:19,3:17
+14,3/5,420,Ron Omann,49,M,Afton,MN,1:38:40,3:18
+15,7/12,353,Dustin Dale,32,M,Springbrook,WI,1:38:55,3:18
+16,8/12,470,Michael McPherson,34,M,Ironwood,MI,1:39:42,3:20
+17,9/12,447,Nate Rhode,30,M,Minneapolis,MN,1:40:35,3:22
+18,6/7,457,James Miller,23,M,Duluth,MN,1:41:18,3:23
+19,1/6,381,Craig Stolen,55,M,Saint Paul,MN,1:42:06,3:25
+20,7/7,455,James Schwinghamer,23,M,Duluth,MN,1:42:48,3:26
+21,4/5,425,Benjamin Mullin,45,M,Lindstrom,MN,1:43:03,3:27
+23,1/14,363,Brent Smith,68,M,Carlton,MN,1:43:42,3:28
+24,2/14,410,Thomas Krenz,63,M,Chisago City,MN,1:45:12,3:31
+25,2/6,377,Mark Ahlers,59,M,Roseville,MN,1:47:18,3:35
+26,3/14,407,Don Pollari,63,M,Duluth,MN,1:47:24,3:35
+27,3/6,338,Patrick Johnson,52,M,Minneapolis,MN,1:48:15,3:37
+28,4/14,416,Will Andresen,64,M,Ironwood,MI,1:49:04,3:39
+29,5/14,412,Kevin Rogers,63,M,Osceola,WI,1:51:22,3:43
+30,6/14,387,Greg Williams,63,M,Carlton,MN,1:51:40,3:44
+31,1/4,468,Julia Lavanger,31,F,Minneapolis,MN,1:54:14,3:49
+32,11/12,352,Levi Illick,34,M,Ashland,WI,1:54:15,3:49
+33,7/14,411,Steve Edling,62,M,Osceola,WI,1:55:16,3:51
+34,1/4,474,Katrin O'Grady,27,F,Minneapolis,MN,1:56:09,3:53
+35,8/14,398,Eric Dott,66,M,Duluth,MN,1:56:30,3:53
+36,2/4,475,Annie Bunio Thompso,37,F,Minneapolis,MN,1:56:53,3:54
+37,1/3,406,Beth Bernhardt,42,F,Duluth,MN,1:57:24,3:55
+38,3/4,444,Molly Watkins,34,F,Duluth,MN,1:57:48,3:56
+39,9/14,366,Kevin Brochman,65,M,Minneapolis,MN,1:58:33,3:58
+40,4/6,430,Randy Peterson,59,M,Northfield,MN,1:59:23,3:59
+41,10/14,415,David Lombardo,63,M,Eau Claire,WI,2:01:10,4:03
+42,1/4,404,John Garrett,71,M,Hayward,WI,2:04:14,4:09
+43,2/4,472,Gabriella Haire,27,F,Minneapolis,MN,2:05:04,4:11
+44,3/4,449,Rebecca Kolstad,27,F,Dayton,MN,2:05:25,4:11
+45,1/2,359,Julie Meyer,58,F,Hayward,WI,2:05:27,4:11
+46,11/14,432,Rick Budde,61,M,Minneapolis,MN,2:08:42,4:18
+47,4/4,427,Eva Reinicke,39,F,Northfield,MN,2:12:24,4:25
+48,2/4,384,Paul Gabriel,73,M,Ogema,WI,2:13:30,4:27
+49,2/3,379,Emily Broderson,47,F,Maple Grove,MN,2:18:08,4:37
+50,1/1,463,Kelly Rogers,65,F,Esko,MN,2:18:50,4:38
+51,5/5,461,Robert Mitchell,45,M,Rochester,MN,2:19:13,4:39
+52,12/14,345,Scott Bloom,65,M,Gordon,WI,2:19:57,4:40
+53,3/4,346,Eric Peterson,79,M,Basalt,CO,2:28:23,4:57
+54,1/1,482,Julie Virkus,72,F,Minneapolis,MN,2:36:34,5:14
+55,4/4,483,Gus Virkus,75,M,Minneapolis,MN,2:36:55,5:14
+56,2/2,439,Elizabeth Burnett,56,F,Minneapolis,MN,2:40:18,5:21
+57,12/12,226,Mark Sandberg,38,M,Cable,WI,2:42:55,5:26
+58,3/3,232,Pamela Toshner,49,F,Barnes,WI,2:48:42,5:38
+59,13/14,418,Thomas Burns,67,M,Herndon,VA,2:49:21,5:39
+60,14/14,458,Geary Searfoss,69,M,Ojibwa,WI,3:01:27,6:03
+61,5/6,452,Daniel Sommer,58,M,Mc Farland,WI,3:05:00,6:10
+62,4/4,476,Chloe Zick,25,F,Saint Paul,MN,3:22:16,6:45
+63,6/6,358,Rj Ochmann,50,M,Minneapolis,MN,3:34:00,7:08
