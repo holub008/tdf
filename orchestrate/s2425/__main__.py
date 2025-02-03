@@ -4,7 +4,8 @@ from orchestrate.s2425 import Event
 from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
 
-EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance, Event.ll_challenge, Event.mount_ashwabay]
+EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance, Event.ll_challenge, Event.mount_ashwabay,
+                   Event.coll]
 
 
 def compute_all_individual_points(g: Gender):
@@ -18,7 +19,8 @@ def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
         .sort(['total_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
 
-    for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points', 'll_challenge_points', 'mount_ashwabay_points']:
+    for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points', 'll_challenge_points', 'mount_ashwabay_points',
+               'coll_points']:
         if rc not in aip.columns:
             aip = aip.with_columns(pl.lit(0.0).alias(rc))
         else:
@@ -35,13 +37,14 @@ def compute_and_write_all_individual_points(g: Gender):
         'firstchance_points': 'First Chance Points',
         'll_challenge_points': 'LL Challenge Points',
         'mount_ashwabay_points': 'Mount Ashwabay Points',
+        'coll_points': 'City of Lakes Loppet Points',
         'total_points': 'Total Points',
         'n_events': 'Number of Events',
     }) \
         .select('Name', 'Overall Place', 'Number of Events',
                 "Skadi's Chase Points", 'Hiihto Relay Points',
                 'First Chance Points', 'LL Challenge Points',
-                'Mount Ashwabay Points',
+                'Mount Ashwabay Points', 'City of Lakes Loppet Points',
                 'Total Points') \
         .fill_null(0) \
         .write_csv(f'orchestrate/s2425/tdf_individual_{g.to_string()}_standings.csv')
@@ -61,6 +64,7 @@ def compute_and_write_team_points():
             pl.col('firstchance_points').round(2).alias('firstchance_points'),
             pl.col('ll_challenge_points').round(2).alias('ll_challenge_points'),
             pl.col('mount_ashwabay_points').round(2).alias('mount_ashwabay_points'),
+            pl.col('coll_points').round(2).alias('city_of_lakes_loppet_points'),
             pl.col('total_points').round(2).alias('total_points'),
         )\
         .rename({
@@ -70,11 +74,12 @@ def compute_and_write_team_points():
             'firstchance_points': 'First Chance Points',
             'll_challenge_points': 'LL Challenge Points',
             'mount_ashwabay_points': 'Mount Ashwabay Points',
+            'coll_points': 'City of Lakes Loppet Points',
             'total_points': 'Total Points'
         })\
         .select('Team Name', 'Overall Place',
                 "Skadi's Chase Points", "Hiihto Points", "First Chance Points", "LL Challenge Points",
-                "Mount Ashwabay Points",
+                "Mount Ashwabay Points", "City of Lakes Loppet Points",
                 'Total Points')\
         .write_csv(f'orchestrate/s2425/tdf_team_standings.csv')
 
@@ -82,4 +87,5 @@ def compute_and_write_team_points():
 if __name__ == '__main__':
     compute_and_write_all_individual_points(Gender.female)
     compute_and_write_all_individual_points(Gender.male)
+    compute_and_write_all_individual_points(Gender.nb)
     compute_and_write_team_points()
