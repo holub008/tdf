@@ -64,7 +64,7 @@ def compute_and_write_team_points():
             pl.col('firstchance_points').round(2).alias('firstchance_points'),
             pl.col('ll_challenge_points').round(2).alias('ll_challenge_points'),
             pl.col('mount_ashwabay_points').round(2).alias('mount_ashwabay_points'),
-            pl.col('coll_points').round(2).alias('city_of_lakes_loppet_points'),
+            pl.col('coll_points').round(2).alias('coll_points'),
             pl.col('total_points').round(2).alias('total_points'),
         )\
         .rename({
