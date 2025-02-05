@@ -26,6 +26,8 @@ pip install -r requirements.txt
 
 ## Running
 
+### Rationale
+
 This project is set up to run & be modified on two periods:
 
 1. Per-season
@@ -35,7 +37,31 @@ Seasons are denoted in how data is `acquire/`d, `orchestrate/`d, and placed in a
 
 Typically, each race week will require the creation of:
 
-- a new `acquire/` script, which retrieves/constructs a `RawResults` object
-- an `orchestrate/` script, which computes points for the event and places it into the `db/`
+- a new `acquire/` script, which retrieves/constructs a dataframe of results with no particular structure
+- an event `orchestrate/` script, which computes points for the event and places it into the `db/`
     - the resulting file in `db/` will occasionally need to be edited by hand when there are name conflicts or other problems 
-- the addition of the event to `orchestrate/season/__main__.py`
+- the addition of the event to `orchestrate/season/__init__.py` & `orchstrate/season/__main__.py`
+    - this process involves a lot of copy/paste from season to season and week to week. Ideally it will be abstracted
+once we settle into a point system.
+
+The reason bullets 2 & 3 are separate is to allow manual editing of a results file (e.g. to deduplicate names).
+This means that the corresponding `acquire/` script should only be run once, to avoid overwriting any manual edits to the `db/` file.
+
+### Commands
+
+To compute points for an event, e.g. city of lakes loppet, run:
+
+```commandline
+python -m orchestrate.s2425.coll
+```
+
+This will write `{event}_{gender}.csv` files under `db/s2425`.
+
+To compute standings for a season, e.g. the 24/25 season, run:
+
+```commandline
+python -m orchestrate.s2425
+```
+
+This will write `*standings.csv` files in `orchestrate`. Note that some debug logging for missing files is expected,
+since most races do not report an NB division, but we still check for it.
