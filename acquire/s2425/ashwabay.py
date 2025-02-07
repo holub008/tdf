@@ -32,7 +32,7 @@ def parse_plain_text_results(text: str) -> pl.DataFrame:
 
         if header_found:
             match = re.match(
-                r"\s*(\d+)\s+(\d+/\d+)\s+(\d+)\s+([\w\s'-]+)\s+(\d+)\s+([MF])\s+([\w\s'-]+)\s+(\w{2})\s+(\d+:\d+:\d+|\d+:\d+)\s+(\d+:\d+)",
+                r"\s*(\d+)\s+(\d+/\d+)\s+(\d+)\s+([\w\s'-]+)\s+(\d+)\s+([MF])\s+([\w\s'\.-]+)\s+(\w{2})\s+(\d+:\d+:\d+|\d+:\d+)\s+(\d+:\d+)",
                 line)
 
             if match:
