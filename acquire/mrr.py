@@ -1,29 +1,38 @@
 import polars as pl
-from bs4 import BeautifulSoup, PageElement
 import requests
 
 
-def _html_to_polars(soup) -> pl.DataFrame:
-    # javascript must mangle the table post-DOM, since
-    headers = [th.text.strip('"') for th in soup.find('thead').find_all('th')]
+def _get_key(event_id: str) -> tuple:
+    url = f'https://my.raceresult.com/{event_id}/RRPublish/data/config?page=results&noVisitor=1&v=1'
+    r = requests.get(url)
+    j = r.json()
+
+    return j['key']
+
+def _load_results(event_id: str, key: str, contest_number: int, list_name: str) -> pl.DataFrame:
+    url = f'https://my3.raceresult.com/{event_id}/RRPublish/data/list'
+    r = requests.get(url, params={
+        'key': key,
+        'listname': list_name,
+        'page': 'results',
+        'contest': contest_number,
+        'r': 'all',
+        'l': 0,
+    })
+    j = r.json()
+    columns = [f['Label'] for f in j['list']['Fields']]
     rows = []
-    body = soup.find('tbody', attrs={'class': 'tb_1Data'})
-    for tr in body.find_all('tr'):
-        row = {}
-        for ix, td in tr.find_all('td'):
-            row[headers[ix]] = td.text
-        rows.append(row)
+    for r in list(j['data'].values())[0]:
+        row_dict = {}
+        # this is specific to vasaloppet 2025. I can't make heads or tails of their API, so i'm hacking valid indices in
+        for ix, c in enumerate(r[1:10]):
+            row_dict[columns[ix]] = c
+        rows.append(row_dict)
+
     return pl.DataFrame(rows)
 
 
-def scrape_race(event_id: str, race_id: str) -> pl.DataFrame:
-    url = f'https://my.raceresult.com/{event_id}/results#{race_id}'
-    r = requests.get(url)
-    bs = BeautifulSoup(r.text)
-    raw_tab = bs.find('table', attrs={'class': 'MainTable'})
-    if not raw_tab:
-        raise ValueError('Missing `MainTable` that would contain results')
-
-    return _html_to_polars(raw_tab)
-
+def scrape_race(event_id: str, contest_number: int, list_name: str):
+    key = _get_key(event_id)
+    return _load_results(event_id, key, contest_number, list_name)
 

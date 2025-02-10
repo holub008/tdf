@@ -11,6 +11,7 @@ class Event(Enum):
     ll_challenge = auto()
     mount_ashwabay = auto()
     coll = auto()
+    vasaloppet = auto()
 
     def to_string(self) -> str:
         return self.name
@@ -27,6 +28,8 @@ class Event(Enum):
             return Event.ll_challenge
         elif s == 'ashwabay':
             return Event.ashwabay
+        elif s == 'vasaloppet':
+            return Event.vasaloppet
 
         raise ValueError(f'Unrecognized event string representation {s}')
 
