@@ -16,8 +16,14 @@ PARTICIPATION_RACES = [
     [6, 'Result Lists|Overall Results'],
 ]
 
-NAME_REGEX = r'(([A-Z][a-z]+ )+)([A-Z| ]+)'
+NAME_REGEX = r'(([A-Z][a-z|-]+ )+)([A-Z| |-]+)'
 AGES_REGEX = r'.* ([0-9]+) to ([0-9]+) .*'
+
+
+def _name_capitalize(n: str) -> str:
+    return " ".join(
+        part.capitalize() for part in n.strip().replace("-", " - ").split()
+    ).replace(" - ", "-")
 
 
 def _split_names(df: pl.DataFrame) -> pl.DataFrame:
@@ -25,7 +31,7 @@ def _split_names(df: pl.DataFrame) -> pl.DataFrame:
         m = re.match(NAME_REGEX, n)
         if not m:
             return None
-        return m.group(3).capitalize()
+        return _name_capitalize(m.group(3))
 
     def extract_first(n: str) -> str:
         m = re.match(NAME_REGEX, n)

@@ -7,7 +7,8 @@ import polars as pl
 
 def _deduplicate_participation_races(main_results: pl.DataFrame, nonmain_results: pl.DataFrame) -> pl.DataFrame:
     # doing participation sucks because there will be duplicates across days. we'll need to clear out
-    # with preference for the main race
+    # with preference for the main race. we also need to dedupe people doing nonmain both days
+    nonmain_results = nonmain_results.unique(['first_name', 'last_name'])
     return nonmain_results.join(main_results, on=['first_name', 'last_name'], how='anti')
 
 
