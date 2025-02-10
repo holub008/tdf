@@ -47,12 +47,12 @@ def attach_event_incentives(aggregate_results: pl.DataFrame) -> pl.DataFrame:
     event_incentives = []
     for ar in aggregate_results.iter_rows(named=True):
         ei = 0
-        if ar['n_events'] >= 3:
-            ei += 15
+        if ar['n_events'] >= 9:
+            ei += 25
         elif ar['n_events'] >= 6:
             ei += 20
-        elif ar['n_events'] >= 9:
-            ei += 25
+        elif ar['n_events'] >= 3:
+            ei += 15
 
         event_incentives.append(ei)
 
