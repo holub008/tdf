@@ -50,8 +50,7 @@ def _expand_team_row(r):
 
 
 def load_team_membership() -> pl.DataFrame:
-    # note, this data is not published to VC to protect personal data (birthday/emails)
-    raw = pl.read_excel(f'db/s2425/Team Registration.xlsx', sheet_name='2024-2025 Long')
+    raw = pl.read_csv(f'db/s2425/teams.csv')
     if not raw.n_unique(subset=TEAM_NAME_COL) == raw.shape[0]:
         raise ValueError('Expected team name to be unique, crashing out to avoid downstream problems')
 
