@@ -1,4 +1,5 @@
 import polars as pl
+import heapq
 
 # TODO this is awkward, have to update the definition each season
 from orchestrate.s2425 import Event
@@ -96,28 +97,37 @@ def compute_total_individual_points(
 
     total_event_points = []
     total_n_events = []
+    series_event_points = []
     for ar in aggregate_results.iter_rows(named=True):
         n_events = 0
         all_event_points = 0
+        ind_event_points = []
         for e in events:
             event_points = ar[f'{e.to_string()}_points']
             # TODO
             if event_points is not None:
                 n_events += 1
                 all_event_points += event_points
+                ind_event_points.append(event_points)
 
         total_event_points.append(all_event_points)
         total_n_events.append(n_events)
+        # limit points to the top 6 results for an individual
+        series_event_points.append(sum(heapq.nlargest(6,ind_event_points)))
 
     aggregate_results = aggregate_results\
         .with_columns(
             pl.Series(name='total_event_points', values=total_event_points),
-            pl.Series(name='n_events', values=total_n_events)
+            pl.Series(name='n_events', values=total_n_events),
+            pl.Series(name='series_points', values=series_event_points)
         )
 
     ar_with_ei = attach_event_incentives(aggregate_results)
     ar_with_ei = ar_with_ei.with_columns(
         pl.col('total_event_points').add(pl.col('event_incentive_points')).alias('total_points')
+    )
+    ar_with_ei = ar_with_ei.with_columns(
+        pl.col('series_points').add(pl.col('event_incentive_points')).alias('final_points')
     )
     return ar_with_ei
 

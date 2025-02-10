@@ -17,7 +17,7 @@ def compute_all_individual_points(g: Gender):
 
 def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
-        .sort(['total_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
+        .sort(['final_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
 
     for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points', 'll_challenge_points', 'mount_ashwabay_points',
                'coll_points']:
@@ -30,6 +30,7 @@ def compute_and_write_all_individual_points(g: Gender):
         pl.concat_str(['first_name', 'last_name'], separator=' ').alias('Name'),
         pl.Series(name='Overall Place', values=range(1, aip.shape[0] + 1)),
         pl.col('total_points').round(2).alias('total_points'),
+        pl.col('final_points').round(2).alias('final_points')
     ) \
         .rename({
         'skadischase_points': "Skadi's Chase Points",
@@ -40,6 +41,7 @@ def compute_and_write_all_individual_points(g: Gender):
         'coll_points': 'City of Lakes Loppet Points',
         'total_points': 'Total Points',
         'n_events': 'Number of Events',
+        'final_points': 'Final Points',
     }) \
         .select('Name', 'Overall Place', 'Number of Events',
                 "Skadi's Chase Points", 'Hiihto Relay Points',
