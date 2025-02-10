@@ -17,7 +17,7 @@ def compute_all_individual_points(g: Gender):
 
 def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
-        .sort(['top_6_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
+        .sort(['series_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
 
     for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points', 'll_challenge_points', 'mount_ashwabay_points',
                'coll_points', 'vasaloppet_points']:
@@ -29,8 +29,7 @@ def compute_and_write_all_individual_points(g: Gender):
     aip.with_columns(
         pl.concat_str(['first_name', 'last_name'], separator=' ').alias('Name'),
         pl.Series(name='Overall Place', values=range(1, aip.shape[0] + 1)),
-        pl.col('total_points').round(2).alias('total_points'),
-        pl.col('top_6_points').round(2).alias('top_6_points')
+        pl.col('series_points').round(2).alias('series_points')
     ) \
         .rename({
         'skadischase_points': "Skadi's Chase Points",
@@ -40,16 +39,15 @@ def compute_and_write_all_individual_points(g: Gender):
         'mount_ashwabay_points': 'Mount Ashwabay Points',
         'coll_points': 'City of Lakes Loppet Points',
         'vasaloppet_points': 'Vasaloppet Points',
-        'total_points': 'Total Points',
+        'series_points': 'Series Points',
         'n_events': 'Number of Events',
-        'top_6_points': 'Top 6 Points',
     }) \
         .select('Name', 'Overall Place', 'Number of Events',
                 "Skadi's Chase Points", 'Hiihto Relay Points',
                 'First Chance Points', 'LL Challenge Points',
                 'Mount Ashwabay Points', 'City of Lakes Loppet Points',
                 'Vasaloppet Points',
-                'Total Points', 'Top 6 Points') \
+                'Series Points') \
         .fill_null(0) \
         .write_csv(f'orchestrate/s2425/tdf_individual_{g.to_string()}_standings.csv')
 
