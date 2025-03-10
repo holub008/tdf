@@ -5,14 +5,23 @@ from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
 
 EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance, Event.ll_challenge, Event.mount_ashwabay,
-                   Event.coll, Event.vasaloppet, Event.pepsi_challenge]
+                   Event.coll, Event.vasaloppet, Event.pepsi_challenge, Event.snu]
+
+SCORER_BIAS = pl.DataFrame([['Karl', 'Holub', -10]], schema=['first_name', 'last_name', 'bias_adjustment'])
+
+
+# reserved for point keepers who shot from the hip repeatedly this season in interpreting rules and results
+def adjust_individual_series_points_for_bias(series_points_df: pl.DataFrame) -> pl.DataFrame:
+    joined = series_points_df.join(SCORER_BIAS, how='left', on=['first_name', 'last_name'])
+    return joined.with_columns(pl.col('series_points').add(pl.col('bias_adjustment').fill_null(0)).alias('series_points'))
 
 
 def compute_all_individual_points(g: Gender):
     results = [load_results(e, g) for e in EVENTS_TO_SCORE]
     valid_events = [EVENTS_TO_SCORE[ix] for ix, r in enumerate(results) if r is not None]
     valid_results = [r for r in results if r is not None]
-    return compute_total_individual_points(valid_results, valid_events)
+    series_points_df = compute_total_individual_points(valid_results, valid_events)
+    return adjust_individual_series_points_for_bias(series_points_df)
 
 
 def compute_and_write_all_individual_points(g: Gender):
@@ -20,7 +29,7 @@ def compute_and_write_all_individual_points(g: Gender):
         .sort(['series_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
 
     for rc in ['skadischase_points', 'hiihto_points', 'firstchance_points', 'll_challenge_points', 'mount_ashwabay_points',
-               'coll_points', 'vasaloppet_points', 'pepsi_challenge_points']:
+               'coll_points', 'vasaloppet_points', 'pepsi_challenge_points', 'snu_points']:
         if rc not in aip.columns:
             aip = aip.with_columns(pl.lit(0.0).alias(rc))
         else:
@@ -40,6 +49,7 @@ def compute_and_write_all_individual_points(g: Gender):
         'coll_points': 'City of Lakes Loppet Points',
         'vasaloppet_points': 'Vasaloppet Points',
         'pepsi_challenge_points': 'Pepsi Challenge Points',
+        'snu_points': 'Ski North Ultra Points',
         'series_points': 'Series Points',
         'n_events': 'Number of Events',
     }) \
@@ -47,7 +57,7 @@ def compute_and_write_all_individual_points(g: Gender):
                 "Skadi's Chase Points", 'Hiihto Relay Points',
                 'First Chance Points', 'LL Challenge Points',
                 'Mount Ashwabay Points', 'City of Lakes Loppet Points',
-                'Vasaloppet Points', 'Pepsi Challenge Points',
+                'Vasaloppet Points', 'Pepsi Challenge Points', 'Ski North Ultra Points',
                 'Series Points') \
         .fill_null(0) \
         .write_csv(f'orchestrate/s2425/tdf_individual_{g.to_string()}_standings.csv')
@@ -70,6 +80,7 @@ def compute_and_write_team_points():
             pl.col('coll_points').round(2).alias('coll_points'),
             pl.col('vasaloppet_points').round(2).alias('vasaloppet_points'),
             pl.col('pepsi_challenge_points').round(2).alias('pepsi_challenge_points'),
+            pl.col('snu_points').round(2).alias('snu_points'),
             pl.col('total_points').round(2).alias('total_points'),
         )\
         .rename({
@@ -82,11 +93,13 @@ def compute_and_write_team_points():
             'coll_points': 'City of Lakes Loppet Points',
             'vasaloppet_points': 'Vasaloppet Points',
             'pepsi_challenge_points': 'Pepsi Challenge Points',
+            'snu_points': 'Ski North Ultra Points',
             'total_points': 'Total Points'
         })\
         .select('Team Name', 'Overall Place',
                 "Skadi's Chase Points", "Hiihto Points", "First Chance Points", "LL Challenge Points",
                 "Mount Ashwabay Points", "City of Lakes Loppet Points", 'Vasaloppet Points', 'Pepsi Challenge Points',
+                'Ski North Ultra Points',
                 'Total Points')\
         .write_csv(f'orchestrate/s2425/tdf_team_standings.csv')
 
