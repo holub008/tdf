@@ -1,17 +1,24 @@
 import os
+from typing import Optional
+
 import polars as pl
 
 from orchestrate.s2425 import Event
 from tdfio.const import Gender
 
 
-def load_results(e: Event, g: Gender) -> pl.DataFrame:
+def load_results(e: Event, g: Gender) -> Optional[pl.DataFrame]:
     fp = f'db/s2425/{e.to_string()}_{g.to_string()}.csv'
     if os.path.exists(fp):
         return pl.read_csv(f'db/s2425/{e.to_string()}_{g.to_string()}.csv')
     else:
         print(f'Skipping over missing file: {fp}')
         return None
+
+
+def load_standings(g: Gender):
+    fp = f'orchestrate/s2425/tdf_individual_{g.to_string()}_standings.csv'
+    return pl.read_csv(fp)
 
 
 TEAM_NAME_COL = 'Team Name:'
