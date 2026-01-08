@@ -2,7 +2,7 @@ import polars as pl
 import heapq
 
 # TODO this is awkward, have to update the definition each season
-from orchestrate.s2425 import Event
+from orchestrate.s2526 import Event
 from tdfio.const import Gender
 
 
