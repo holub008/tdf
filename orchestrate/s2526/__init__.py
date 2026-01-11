@@ -6,16 +6,17 @@ from tdfio.const import Gender
 
 class Event(Enum):
     bcfk = auto()
+    seeley = auto()
 
     def to_string(self) -> str:
         return self.name
 
     @staticmethod
     def from_string(s: str):
-        if s == 'bcfk':
-            return Event.bcfk
-
-        raise ValueError(f'Unrecognized event string representation {s}')
+        match = [v.name for v in Event if v.name == s]
+        if not match:
+            raise ValueError(f'Unrecognized event string representation {s}')
+        return match
 
     def save_df(self, df: pl.DataFrame, g: Gender):
         pretty_df = df.sort(by='age_advantage_event_points', descending=True)

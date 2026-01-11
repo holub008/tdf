@@ -6,7 +6,7 @@ import polars as pl
 
 from tdfio.const import Gender
 
-NAME_REGEX = r'(([A-Z][a-z|-]+ )+)([A-Z| |-]+)'
+NAME_REGEX = r'(([A-Z][a-z]+( |-))+)([A-Z| |-]+)'
 
 
 def _name_capitalize(n: str) -> str:
@@ -19,7 +19,7 @@ def _parse_name(n: str) -> Optional[tuple[str, str]]:
     m = re.match(NAME_REGEX, n)
     if not m:
         return None
-    return m.group(1), _name_capitalize(m.group(3))
+    return m.group(1).strip(), _name_capitalize(m.group(4))
 
 
 def _parse_gender_place(s: str) -> tuple[Gender, int]:
