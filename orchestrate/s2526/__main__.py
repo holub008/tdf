@@ -56,8 +56,6 @@ def compute_and_write_team_points():
     membership = load_team_membership()
     male_points = compute_all_individual_points(Gender.male)
     female_points = compute_all_individual_points(Gender.female)
-    print(male_points)
-    print(female_points)
     tp = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
     tp\
         .sort('total_points', descending=True)\
