@@ -4,7 +4,7 @@ from orchestrate.s2526 import Event
 from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
 
-EVENTS_TO_SCORE = [Event.bcfk]
+EVENTS_TO_SCORE = [Event.bcfk, Event.seeley]
 
 SCORER_BIAS = pl.DataFrame([['Karl', 'Holub', -10]], schema=['first_name', 'last_name', 'bias_adjustment'])
 
@@ -25,9 +25,9 @@ def compute_all_individual_points(g: Gender):
 
 def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
-        .sort(['series_points', 'first_name', 'last_name'], descending=True) # name just adds a stable sort for ties
+        .sort(['series_points', 'first_name', 'last_name'], descending=True)  # name just adds a stable sort for ties
 
-    for rc in ['bcfk_points']:
+    for rc in ['bcfk_points', 'seeley_points']:
         if rc not in aip.columns:
             aip = aip.with_columns(pl.lit(0.0).alias(rc))
         else:
@@ -39,12 +39,14 @@ def compute_and_write_all_individual_points(g: Gender):
         pl.col('series_points').round(2).alias('series_points')
     ) \
         .rename({
-        'bcfk_points': "BCFK Points",
+        'bcfk_points': 'BCFK Points',
+        'seeley_points': 'Seeley Hills Points',
         'series_points': 'Series Points',
         'n_events': 'Number of Events',
     }) \
         .select('Name', 'Overall Place', 'Number of Events',
-                "BCFK Points",
+                'BCFK Points',
+                'Seeley Hills Points',
                 'Series Points') \
         .fill_null(0) \
         .write_csv(f'orchestrate/s2526/tdf_individual_{g.to_string()}_standings.csv')
@@ -60,15 +62,18 @@ def compute_and_write_team_points():
         .with_columns(
             pl.Series(name='Overall Place', values=range(1, tp.shape[0] + 1)),
             pl.col('bcfk_points').round(2).alias('bcfk_points'),
+            pl.col('seeley_points').round(2).alias('seeley_points'),
             pl.col('total_points').round(2).alias('total_points'),
         )\
         .rename({
             'team_name': 'Team Name',
-            'bcfk_points': "BCFK Points",
+            'bcfk_points': 'BCFK Points',
+            'seeley_points': 'Seeley Points',
             'total_points': 'Total Points'
         })\
         .select('Team Name', 'Overall Place',
-                "BCFK Points",
+                'BCFK Points',
+                'Seeley Points',
                 'Total Points')\
         .write_csv('orchestrate/s2526/tdf_team_standings.csv')
 
@@ -76,6 +81,6 @@ def compute_and_write_team_points():
 if __name__ == '__main__':
     compute_and_write_all_individual_points(Gender.female)
     compute_and_write_all_individual_points(Gender.male)
-    # Reinstitue when there are results
+    # Reinstitute when there are results
     # compute_and_write_all_individual_points(Gender.nb)
     compute_and_write_team_points()

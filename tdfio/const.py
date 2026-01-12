@@ -32,9 +32,15 @@ class Gender(Enum):
             raise ValueError(f'Unrecognized gender {s}')
 
     def to_string(self):
+        """
+        deprecated
+        """
         if self == Gender.male:
             return 'male'
         elif self == Gender.female:
             return 'female'
         else:
             return 'nb'
+
+    def __str__(self) -> str:
+        return self.to_string()
