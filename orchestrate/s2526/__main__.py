@@ -3,6 +3,7 @@ from db.s2526 import load_results, load_team_membership
 from orchestrate.s2526 import Event
 from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
+from db.namequality import perform_alias_quality_check
 
 EVENTS_TO_SCORE = [Event.bcfk, Event.seeley]
 
@@ -77,10 +78,18 @@ def compute_and_write_team_points():
                 'Total Points')\
         .write_csv('orchestrate/s2526/tdf_team_standings.csv')
 
-
 if __name__ == '__main__':
-    compute_and_write_all_individual_points(Gender.female)
-    compute_and_write_all_individual_points(Gender.male)
-    # Reinstitute when there are results
-    # compute_and_write_all_individual_points(Gender.nb)
+    genders = [
+        Gender.female,
+        Gender.male,
+        # TODO Reinstitute when there are results
+        # Gender.nb
+    ]
+
+    # Perform and report on name quality
+    for g in genders:
+        perform_alias_quality_check(g, events=EVENTS_TO_SCORE, load_results=load_results)
+
+    for g in genders:
+        compute_and_write_all_individual_points(g)
     compute_and_write_team_points()

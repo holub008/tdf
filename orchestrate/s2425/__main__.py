@@ -1,8 +1,10 @@
 import polars as pl
+from db.namequality import perform_alias_quality_check
 from db.s2425 import load_results, load_team_membership
 from orchestrate.s2425 import Event
 from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
+from db.namequality import perform_alias_quality_check
 
 EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance, Event.ll_challenge, Event.mount_ashwabay,
                    Event.coll, Event.vasaloppet, Event.pepsi_challenge, Event.snu]
@@ -105,7 +107,9 @@ def compute_and_write_team_points():
 
 
 if __name__ == '__main__':
-    compute_and_write_all_individual_points(Gender.female)
-    compute_and_write_all_individual_points(Gender.male)
-    compute_and_write_all_individual_points(Gender.nb)
+    genders = [Gender.female, Gender.male, Gender.nb]
+
+    for g in genders:
+        perform_alias_quality_check(g, events=EVENTS_TO_SCORE, load_results=load_results)
+        compute_and_write_all_individual_points(g)
     compute_and_write_team_points()
