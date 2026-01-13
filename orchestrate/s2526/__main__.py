@@ -1,9 +1,9 @@
 import polars as pl
 from db.s2526 import load_results, load_team_membership
+from db.namequality import perform_alias_quality_check
 from orchestrate.s2526 import Event
 from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
-from db.namequality import perform_alias_quality_check
 
 EVENTS_TO_SCORE = [Event.bcfk, Event.seeley]
 

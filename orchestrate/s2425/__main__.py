@@ -1,10 +1,9 @@
 import polars as pl
-from db.namequality import perform_alias_quality_check
 from db.s2425 import load_results, load_team_membership
+from db.namequality import perform_alias_quality_check
 from orchestrate.s2425 import Event
 from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
-from db.namequality import perform_alias_quality_check
 
 EVENTS_TO_SCORE = [Event.skadischase, Event.hiihto, Event.firstchance, Event.ll_challenge, Event.mount_ashwabay,
                    Event.coll, Event.vasaloppet, Event.pepsi_challenge, Event.snu]
