@@ -49,7 +49,6 @@ def perform_alias_quality_check(g: Gender, events: list, load_results: callable)
             issues.append(hits)
 
     if not issues:
-        print(f"{g.to_string()}: Alias quality check: no known-alias matches found.")
         return
 
     report = pl.concat(issues).sort(["event", "gender", "last_name", "first_name"])
@@ -65,3 +64,4 @@ def perform_alias_quality_check(g: Gender, events: list, load_results: callable)
             f"{place}{age}"
             f"{Ansi.RESET}"
         )
+        print("To make this alert go away, either consolidate the aliased names to the preferred names in db/season/*.csv or remove the alias from db/known_aliases.csv if it's a frequent false positive.")
