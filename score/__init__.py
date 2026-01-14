@@ -148,9 +148,12 @@ def _compute_event_team_points_within_gender(
           .over("team_name")
           .alias("team_rank")
     ).with_columns(
-        (pl.col("team_rank") <= 3).alias("is_scoring")
+        pl.when(pl.col("team_rank") <= 3)
+          .then(pl.lit("Yes"))
+          .otherwise(pl.lit("No"))
+          .alias("is_scoring")
     ).with_columns(
-        pl.lit(e.to_string()).alias("event"),
+        pl.lit(e.get_human_readable_name()).alias("event"),
     )
 
     if report_rows is not None:
@@ -161,7 +164,7 @@ def _compute_event_team_points_within_gender(
                 "gender",
                 "first_name",
                 "last_name",
-                pl.col(event_points_column).alias("event_points"),
+                pl.col(event_points_column).round(2).alias("event_points"),
                 "team_rank",
                 "is_scoring",
             ])
