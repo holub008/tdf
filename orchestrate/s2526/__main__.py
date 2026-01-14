@@ -89,7 +89,5 @@ if __name__ == '__main__':
     # Perform and report on name quality
     for g in genders:
         perform_alias_quality_check(g, events=EVENTS_TO_SCORE, load_results=load_results)
-
-    for g in genders:
         compute_and_write_all_individual_points(g)
     compute_and_write_team_points()
