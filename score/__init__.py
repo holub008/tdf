@@ -124,13 +124,48 @@ def compute_total_individual_points(
     return ar_with_ei
 
 
-def _compute_event_team_points_within_gender(membership: pl.DataFrame, points: pl.DataFrame, e: Event) -> pl.DataFrame:
+def _compute_event_team_points_within_gender(
+    membership: pl.DataFrame,
+    points: pl.DataFrame,
+    e: Event,
+    report_rows: list | None = None,   # NEW
+) -> pl.DataFrame:
     event_points_column = f'{e.to_string()}_points'
     joinable_points = points.select([event_points_column, 'first_name', 'last_name']).drop_nulls([event_points_column])
     points_joined_membership = membership.join(joinable_points, on=['first_name', 'last_name'], how='inner')
 
     if not points_joined_membership.n_unique(['first_name', 'last_name']) == points_joined_membership.shape[0]:
         raise ValueError('Unexpected multijoin, bad bad bad')
+
+    points_joined_membership = points_joined_membership.sort(
+        ['team_name', event_points_column],
+        descending=[False, True]
+    )
+
+    ranked = points_joined_membership.with_columns(
+        pl.col(event_points_column)
+          .rank(method="dense", descending=True)
+          .over("team_name")
+          .alias("team_rank")
+    ).with_columns(
+        (pl.col("team_rank") <= 3).alias("is_scoring")
+    ).with_columns(
+        pl.lit(e.to_string()).alias("event"),
+    )
+
+    if report_rows is not None:
+        report_rows.append(
+            ranked.select([
+                "event",
+                "team_name",
+                "gender",
+                "first_name",
+                "last_name",
+                pl.col(event_points_column).alias("event_points"),
+                "team_rank",
+                "is_scoring",
+            ])
+        )
 
     top_3_scorers_by_team = pl.concat([
         x.top_k(3, by=event_points_column)
@@ -146,16 +181,20 @@ def _compute_event_team_points_within_gender(membership: pl.DataFrame, points: p
 
 def compute_team_points(membership: pl.DataFrame, male_points: pl.DataFrame, female_points: pl.DataFrame, events: list) -> pl.DataFrame:
     gender_points_by_team = []
+    report_rows: list[pl.DataFrame] = []
+
     for g in [Gender.female, Gender.male]:
         gender_membership = membership.filter(pl.col('gender') == g.to_string())
         gender_points = male_points if g == Gender.male else female_points
 
-        all_gender_points = _compute_event_team_points_within_gender(gender_membership, gender_points, events[0])
+        all_gender_points = _compute_event_team_points_within_gender(gender_membership, gender_points, events[0], report_rows=report_rows)
         for e in events[1:]:
-            event_gender_points = _compute_event_team_points_within_gender(gender_membership, gender_points, e)
+            event_gender_points = _compute_event_team_points_within_gender(gender_membership, gender_points, e, report_rows=report_rows)
             all_gender_points = all_gender_points.join(event_gender_points, on='team_name', how='outer')
 
         gender_points_by_team.append(all_gender_points)
+
+    team_points_report = pl.concat(report_rows) if report_rows else pl.DataFrame()
 
     magic_suffix = '_female'
     gpbt_joined = gender_points_by_team[0]\
@@ -170,8 +209,8 @@ def compute_team_points(membership: pl.DataFrame, male_points: pl.DataFrame, fem
             pl.col(event_column1).add(pl.col(event_column2)).alias(event_column1)
         )
 
-    return gpbt_joined \
+    final_scores = gpbt_joined \
         .select(['team_name'] + all_event_columns)\
         .with_columns(pl.sum_horizontal(all_event_columns).alias('total_points'))
 
-
+    return (final_scores, team_points_report)

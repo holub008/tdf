@@ -56,7 +56,7 @@ def compute_and_write_team_points():
     membership = load_team_membership()
     male_points = compute_all_individual_points(Gender.male)
     female_points = compute_all_individual_points(Gender.female)
-    tp = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
+    (tp, report) = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
     tp\
         .sort('total_points', descending=True)\
         .with_columns(
@@ -77,6 +77,10 @@ def compute_and_write_team_points():
                 'Total Points')\
         .write_csv('orchestrate/s2526/tdf_team_standings.csv')
 
+    report\
+        .sort(['team_name','event','gender','team_rank'],descending=[False,False,False,False])\
+        .select('team_name', 'event', 'gender', 'first_name', 'last_name', 'team_rank', 'event_points', 'is_scoring')\
+        .write_csv('orchestrate/s2526/tdf_team_scoring_report.csv')
 
 if __name__ == '__main__':
     compute_and_write_all_individual_points(Gender.female)
