@@ -7,7 +7,7 @@ from orchestrate.s2526 import Event
 from tdfio.const import Gender
 
 @dataclass(frozen=True)
-class EventTeamPointsWithinGenderResult:
+class EventTeamPointsResult:
     team_scores: pl.DataFrame
     report: pl.DataFrame
 
@@ -181,7 +181,7 @@ def _compute_event_team_points_within_gender(
         .agg(pl.col(event_points_column).sum().alias(event_points_column))\
         .select('team_name', event_points_column)
 
-    return EventTeamPointsWithinGenderResult(team_scores=team_scores, report=report_df)
+    return EventTeamPointsResult(team_scores=team_scores, report=report_df)
 
 
 def compute_team_points(
@@ -189,7 +189,7 @@ def compute_team_points(
     male_points: pl.DataFrame,
     female_points: pl.DataFrame,
     events: list[Event],
-):
+) -> EventTeamPointsResult:
     gender_points_by_team = []
     report_dfs: list[pl.DataFrame] = []
 
@@ -227,4 +227,4 @@ def compute_team_points(
         .select(['team_name'] + all_event_columns)\
         .with_columns(pl.sum_horizontal(all_event_columns).alias('total_points'))
 
-    return (final_scores, team_points_report)
+    return EventTeamPointsResult(final_scores, team_points_report)
