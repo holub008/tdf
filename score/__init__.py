@@ -148,7 +148,7 @@ def _compute_event_team_points_within_gender(
 
     ranked = points_joined_membership.with_columns(
         pl.col(event_points_column)
-          .rank(method="dense", descending=True)
+          .rank(method="ordinal", descending=True)
           .over("team_name")
           .alias("team_rank")
     ).with_columns(
