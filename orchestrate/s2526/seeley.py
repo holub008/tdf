@@ -1,4 +1,3 @@
-
 import polars as pl
 
 from acquire.s2526.seeley import get_results
