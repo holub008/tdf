@@ -13,20 +13,36 @@ def _attach_gender_place(df: pl.DataFrame) -> pl.DataFrame:
 
 
 def scrape_race(race_id: int) -> RawResults:
-    res = requests.get('https://www.mtecresults.com/race/rankedResults',
-                            # who knows what max perPage the server will allow, but 500 should be good for most races
-                            params={'raceId': str(race_id), 'rankingType': 'OVERALL', 'perPage': '500'},
-                            headers={
-                                'X-Requested-With': 'XMLHttpRequest',
-                                # mtec uses cloudfront, which seems to be configured with minimal UA checking
-                                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
-                            })
-    soup = BeautifulSoup(res.text, 'html.parser')
+    all_rows = []
+    header = None
+    offset = 0
+    per_page = 50
+    
+    while True:
+        res = requests.get('https://www.mtecresults.com/race/rankedResults',
+                                params={'raceId': str(race_id), 'rankingType': 'OVERALL', 'perPage': str(per_page), 'offset': str(offset)},
+                                headers={
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                    # mtec uses cloudfront, which seems to be configured with minimal UA checking
+                                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+                                })
+        soup = BeautifulSoup(res.text, 'html.parser')
+        
+        # Get header on first iteration
+        if header is None:
+            header = [cell.text for cell in soup.select('thead tr th')]
+        
+        # Get rows from current page
+        rows = [[cell.text.strip() for cell in row.select('td')] for row in soup.select('tbody tr')]
+        
+        # Break if no rows returned
+        if len(rows) == 0:
+            break
+        
+        all_rows.extend(rows)
+        offset += per_page
 
-    header = [cell.text for cell in soup.select('thead tr th')]
-    rows = [[cell.text.strip() for cell in row.select('td')] for row in soup.select('tbody tr')]
-
-    data = {col: [row[i] for row in rows] for i, col in enumerate(header)}
+    data = {col: [row[i] for row in all_rows] for i, col in enumerate(header)}
     rr = _attach_gender_place(pl.DataFrame(data)).rename({
         'Name': 'name',
         'Sex': 'gender',
