@@ -80,7 +80,7 @@ def compute_and_write_team_points():
             'team_name': 'Team Name',
             'total_points': 'Total Points'
         } | {f'{e.to_string()}_points': f'{e.get_human_readable_name()} Points' for e in EVENTS_TO_SCORE})\
-        .select(['Overall Place', 'Team Name'] + [f'{e.get_human_readable_name()} Points' for e in EVENTS_TO_SCORE] + ['Total Points'])\
+        .select(['Overall Place', 'Team Name', 'Total Points'] + [f'{e.get_human_readable_name()} Points' for e in EVENTS_TO_SCORE])\
         .write_csv('orchestrate/s2526/tdf_team_standings.csv')
 
     results.report\
