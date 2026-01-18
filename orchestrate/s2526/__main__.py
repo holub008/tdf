@@ -2,7 +2,7 @@ import polars as pl
 from db.s2526 import load_results, load_team_membership
 from db.namequality import perform_alias_quality_check
 from orchestrate.s2526 import Event
-from score import compute_total_individual_points, compute_team_points
+from score import compute_total_individual_points, compute_team_points, EventTeamPointsResult
 from tdfio.const import Gender
 
 EVENTS_TO_SCORE = [Event.bcfk, Event.seeley]
@@ -57,11 +57,11 @@ def compute_and_write_team_points():
     membership = load_team_membership()
     male_points = compute_all_individual_points(Gender.male)
     female_points = compute_all_individual_points(Gender.female)
-    tp = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
-    tp\
+    results = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
+    results.team_scores\
         .sort('total_points', descending=True)\
         .with_columns(
-            pl.Series(name='Overall Place', values=range(1, tp.shape[0] + 1)),
+            pl.Series(name='Overall Place', values=range(1, results.team_scores.shape[0] + 1)),
             pl.col('bcfk_points').round(2).alias('bcfk_points'),
             pl.col('seeley_points').round(2).alias('seeley_points'),
             pl.col('total_points').round(2).alias('total_points'),
@@ -77,6 +77,11 @@ def compute_and_write_team_points():
                 'Seeley Points',
                 'Total Points')\
         .write_csv('orchestrate/s2526/tdf_team_standings.csv')
+
+    results.report\
+        .sort(['team_name','event','gender','team_rank'],descending=[False,False,False,False])\
+        .select('team_name', 'event', 'gender', 'first_name', 'last_name', 'team_rank', 'event_points', 'is_scoring')\
+        .write_csv('orchestrate/s2526/tdf_team_scoring_report.csv')
 
 if __name__ == '__main__':
     genders = [

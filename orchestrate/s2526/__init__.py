@@ -5,11 +5,14 @@ from tdfio.const import Gender
 
 
 class Event(Enum):
-    bcfk = auto()
-    seeley = auto()
+    bcfk = "Battle Creek Fifty K"
+    seeley = "Seeley Hills Classic"
 
     def to_string(self) -> str:
         return self.name
+    
+    def get_human_readable_name(self) -> str:
+        return self.value
 
     @staticmethod
     def from_string(s: str):
