@@ -7,6 +7,7 @@ from tdfio.const import Gender
 class Event(Enum):
     bcfk = "Battle Creek Fifty K"
     seeley = "Seeley Hills Classic"
+    riverview = 'Riverview Loppet'
 
     def to_string(self) -> str:
         return self.name

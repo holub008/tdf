@@ -5,7 +5,7 @@ from orchestrate.s2526 import Event
 from score import compute_total_individual_points, compute_team_points, EventTeamPointsResult
 from tdfio.const import Gender
 
-EVENTS_TO_SCORE = [Event.bcfk, Event.seeley]
+EVENTS_TO_SCORE = [Event.bcfk, Event.seeley, Event.riverview]
 
 SCORER_BIAS = pl.DataFrame([['Karl', 'Holub', -10]], schema=['first_name', 'last_name', 'bias_adjustment'])
 
@@ -20,6 +20,16 @@ def compute_all_individual_points(g: Gender):
     results = [load_results(e, g) for e in EVENTS_TO_SCORE]
     valid_events = [EVENTS_TO_SCORE[ix] for ix, r in enumerate(results) if r is not None]
     valid_results = [r for r in results if r is not None]
+    if not valid_results:
+        return pl.DataFrame(
+            data=[],
+            schema={
+                'first_name': pl.Utf8,
+                'last_name': pl.Utf8,
+                'series_points': pl.Float64,
+                'n_events': pl.Int64
+            }
+        )
     series_points_df = compute_total_individual_points(valid_results, valid_events)
     return adjust_individual_series_points_for_bias(series_points_df)
 
@@ -28,7 +38,8 @@ def compute_and_write_all_individual_points(g: Gender):
     aip = compute_all_individual_points(g) \
         .sort(['series_points', 'first_name', 'last_name'], descending=True)  # name just adds a stable sort for ties
 
-    for rc in ['bcfk_points', 'seeley_points']:
+    for event in EVENTS_TO_SCORE:
+        rc = f'{event.to_string()}_points'
         if rc not in aip.columns:
             aip = aip.with_columns(pl.lit(0.0).alias(rc))
         else:
@@ -40,15 +51,10 @@ def compute_and_write_all_individual_points(g: Gender):
         pl.col('series_points').round(2).alias('series_points')
     ) \
         .rename({
-        'bcfk_points': 'BCFK Points',
-        'seeley_points': 'Seeley Hills Points',
-        'series_points': 'Series Points',
-        'n_events': 'Number of Events',
-    }) \
-        .select('Name', 'Overall Place', 'Number of Events',
-                'BCFK Points',
-                'Seeley Hills Points',
-                'Series Points') \
+            'n_events': 'Number of Events',
+            'series_points': 'Series Points',
+        } | {f'{e.to_string()}_points': f'{e.get_human_readable_name()} Points' for e in EVENTS_TO_SCORE}) \
+        .select(['Overall Place', 'Name', 'Number of Events', 'Series Points'] + [f'{e.get_human_readable_name()} Points' for e in EVENTS_TO_SCORE]) \
         .fill_null(0) \
         .write_csv(f'orchestrate/s2526/tdf_individual_{g.to_string()}_standings.csv')
 
@@ -58,37 +64,36 @@ def compute_and_write_team_points():
     male_points = compute_all_individual_points(Gender.male)
     female_points = compute_all_individual_points(Gender.female)
     results = compute_team_points(membership, male_points, female_points, EVENTS_TO_SCORE)
-    results.team_scores\
-        .sort('total_points', descending=True)\
+    
+    # Round all event points columns
+    team_scores = results.team_scores.sort('total_points', descending=True)
+    for event in EVENTS_TO_SCORE:
+        col_name = f'{event.to_string()}_points'
+        team_scores = team_scores.with_columns(pl.col(col_name).round(2).alias(col_name))
+    
+    team_scores\
         .with_columns(
-            pl.Series(name='Overall Place', values=range(1, results.team_scores.shape[0] + 1)),
-            pl.col('bcfk_points').round(2).alias('bcfk_points'),
-            pl.col('seeley_points').round(2).alias('seeley_points'),
+            pl.Series(name='Overall Place', values=range(1, team_scores.shape[0] + 1)),
             pl.col('total_points').round(2).alias('total_points'),
         )\
         .rename({
             'team_name': 'Team Name',
-            'bcfk_points': 'BCFK Points',
-            'seeley_points': 'Seeley Points',
             'total_points': 'Total Points'
-        })\
-        .select('Team Name', 'Overall Place',
-                'BCFK Points',
-                'Seeley Points',
-                'Total Points')\
+        } | {f'{e.to_string()}_points': f'{e.get_human_readable_name()} Points' for e in EVENTS_TO_SCORE})\
+        .select(['Overall Place', 'Team Name', 'Total Points'] + [f'{e.get_human_readable_name()} Points' for e in EVENTS_TO_SCORE])\
         .write_csv('orchestrate/s2526/tdf_team_standings.csv')
 
     results.report\
-        .sort(['team_name','event','gender','team_rank'],descending=[False,False,False,False])\
+        .sort(['team_name', 'event', 'gender', 'team_rank'], descending=[False, False, False, False])\
         .select('team_name', 'event', 'gender', 'first_name', 'last_name', 'team_rank', 'event_points', 'is_scoring')\
         .write_csv('orchestrate/s2526/tdf_team_scoring_report.csv')
+
 
 if __name__ == '__main__':
     genders = [
         Gender.female,
         Gender.male,
-        # TODO Reinstitute when there are results
-        # Gender.nb
+        Gender.nb
     ]
 
     # Perform and report on name quality
