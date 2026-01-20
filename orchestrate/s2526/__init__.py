@@ -1,4 +1,4 @@
-from enum import auto, Enum
+from enum import Enum
 import polars as pl
 
 from tdfio.const import Gender
