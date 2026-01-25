@@ -102,7 +102,8 @@ def compute_total_individual_points(
                   .groupby(['first_name', 'last_name'])
                   .count()
                   .filter(pl.col('count') > 1))
-            raise ValueError('Data contained a many-1 join on names')
+            raise ValueError('Data contained a many-1 join on names. Go fix this in db/ data by making '
+                             'names unique (e.g. using the age/location in parens)')
 
         aggregate_results = joined
 
