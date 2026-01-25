@@ -3,8 +3,8 @@ Casual Elite,Battle Creek Fifty K,male,Will,Nielsen,1,72.0,Yes
 Casual Elite,Battle Creek Fifty K,male,Dave,Niday,2,69.0,Yes
 Casual Elite,Riverview Loppet,male,Dave,Niday,1,64.41,Yes
 Casual Elite,Seeley Hills Classic,male,Dave,Niday,1,20.0,Yes
-Des Moines Lake Nordic Ski Team,Seeley Hills Classic,male,Adam,Burnett,1,20.0,Yes
-Des Moines Lake Nordic Ski Team,Seeley Hills Classic,male,Brian,Markes,2,20.0,Yes
+Des Moines Lake Nordic Ski Team,Seeley Hills Classic,male,Brian,Markes,1,20.0,Yes
+Des Moines Lake Nordic Ski Team,Seeley Hills Classic,male,Adam,Burnett,2,20.0,Yes
 Finnish Postal Service,Battle Creek Fifty K,female,Rebecca,Kolstad,1,58.82,Yes
 Finnish Postal Service,Battle Creek Fifty K,male,Spencer,Davis,1,90.0,Yes
 Finnish Postal Service,Riverview Loppet,male,Karl,Holub,1,76.27,Yes
@@ -30,8 +30,8 @@ Hoigaards/Breadsmith A Team,Riverview Loppet,female,Michelle,Hatch,2,35.71,Yes
 Hoigaards/Breadsmith A Team,Seeley Hills Classic,female,Victoria,Ranua,1,69.86,Yes
 Hoigaards/Breadsmith A Team,Seeley Hills Classic,male,John,Rock,1,85.74,Yes
 Hoigaards/Breadsmith A Team,Seeley Hills Classic,male,Paul,Schoening,2,78.16,Yes
-Hoigaards/Breadsmith A Team,Seeley Hills Classic,male,Rick,Pike,3,20.0,Yes
-Hoigaards/Breadsmith A Team,Seeley Hills Classic,male,Anders,Sonnesyn,4,20.0,No
+Hoigaards/Breadsmith A Team,Seeley Hills Classic,male,Anders,Sonnesyn,3,20.0,Yes
+Hoigaards/Breadsmith A Team,Seeley Hills Classic,male,Rick,Pike,4,20.0,No
 Ski EU Later,Battle Creek Fifty K,female,Julie,Rieth,1,44.29,Yes
 Ski EU Later,Battle Creek Fifty K,female,Sarah,Richter,2,41.18,Yes
 Ski EU Later,Battle Creek Fifty K,female,Molly,Schaus,3,38.24,Yes
@@ -42,8 +42,8 @@ Ski EU Later,Noquemanon,male,Ron,Omann,1,86.79,Yes
 Ski EU Later,Riverview Loppet,male,Ron,Omann,1,77.88,Yes
 Ski EU Later,Seeley Hills Classic,female,Julie,Rieth,1,82.97,Yes
 Ski EU Later,Seeley Hills Classic,female,Patty,Carlen,2,20.0,Yes
-Ski EU Later,Seeley Hills Classic,female,Sarah,Richter,3,20.0,Yes
-Ski EU Later,Seeley Hills Classic,female,Molly,Schaus,4,20.0,No
+Ski EU Later,Seeley Hills Classic,female,Molly,Schaus,3,20.0,Yes
+Ski EU Later,Seeley Hills Classic,female,Sarah,Richter,4,20.0,No
 Ski EU Later,Seeley Hills Classic,male,Ron,Omann,1,97.76,Yes
 Ski EU Later,Seeley Hills Classic,male,Joseph,Altendahl,2,20.0,Yes
 Snowbra Kai Academy,Battle Creek Fifty K,male,Dennis,Curran,1,84.0,Yes
@@ -94,6 +94,7 @@ Vakava Seniorit,Battle Creek Fifty K,male,Craig,Cardinal,1,96.0,Yes
 Vakava Seniorit,Battle Creek Fifty K,male,Brock,Lundberg,2,69.0,Yes
 Vakava Seniorit,Battle Creek Fifty K,male,Ben,Mullin,3,29.0,Yes
 Vakava Seniorit,Noquemanon,male,Brock,Lundberg,1,74.02,Yes
+Vakava Seniorit,Noquemanon,male,Ben,Mullin,2,65.83,Yes
 Vakava Seniorit,Riverview Loppet,female,Marybeth,Tuttle,1,100.0,Yes
 Vakava Seniorit,Riverview Loppet,female,Elspeth,Ronnander,2,64.29,Yes
 Vakava Seniorit,Riverview Loppet,female,Eva,Reinicke,3,28.57,Yes
@@ -113,6 +114,6 @@ Yamageddon,Riverview Loppet,male,Andrew,Tilman,1,94.92,Yes
 Yamageddon,Seeley Hills Classic,female,Julie,Garretson,1,94.52,Yes
 Yamageddon,Seeley Hills Classic,female,Ana,Zembryki,2,67.12,Yes
 Yamageddon,Seeley Hills Classic,male,Josh,Doebbert,1,88.82,Yes
-Yamageddon,Seeley Hills Classic,male,Erik,Hendrickson,2,20.0,Yes
-Yamageddon,Seeley Hills Classic,male,Andrew,Tilman,3,20.0,Yes
-Yamageddon,Seeley Hills Classic,male,Louis,Sirota,4,20.0,No
+Yamageddon,Seeley Hills Classic,male,Louis,Sirota,2,20.0,Yes
+Yamageddon,Seeley Hills Classic,male,Erik,Hendrickson,3,20.0,Yes
+Yamageddon,Seeley Hills Classic,male,Andrew,Tilman,4,20.0,No
