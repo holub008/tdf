@@ -160,7 +160,7 @@ gender_place,first_name,last_name,age,age_advantage_event_points
 999,Ryan,Welts,999,20.0
 999,Rene,Garcia Reyes,999,20.0
 999,Noah,Struck,999,20.0
-999,Nicholas,Johnson,999,20.0
+999,Nicholas(Bark),Johnson,999,20.0
 999,Jim,Didomenico,999,20.0
 999,Bjorn,Hagstrom,999,20.0
 999,Paul,Stefanac,999,20.0
@@ -385,7 +385,7 @@ gender_place,first_name,last_name,age,age_advantage_event_points
 999,Timothy,Grenier,999,20.0
 999,Tom,Dvoratchek,999,20.0
 999,Rob,Fox,999,20.0
-999,Nicholas,Johnson,999,20.0
+999,Nicholas(Rogers),Johnson,999,20.0
 999,Aidan,Guiney,999,20.0
 999,Eddie,Gurney,999,20.0
 999,Daniel,York,999,20.0
@@ -522,6 +522,6 @@ gender_place,first_name,last_name,age,age_advantage_event_points
 999,Jeff,Ryan,999,20.0
 999,Christopher,Gray,999,20.0
 999,Steve,Whitesall,999,20.0
-999,Frederick,Kundert,999,20.0
-999,Frederick,Kundert,999,20.0
+999,Frederick(Tennessee),Kundert,999,20.0
+999,Frederick(Florida),Kundert,999,20.0
 999,Tom,Shaw,999,20.0

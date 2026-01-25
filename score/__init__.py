@@ -6,10 +6,12 @@ from dataclasses import dataclass
 from orchestrate.s2526 import Event
 from tdfio.const import Gender
 
+
 @dataclass(frozen=True)
 class EventTeamPointsResult:
     team_scores: pl.DataFrame
     report: pl.DataFrame
+
 
 def compute_age_advantage(rr):
     return rr.with_columns(
@@ -79,23 +81,27 @@ def compute_total_individual_points(
         raise ValueError('must supply 1 or more ')
 
     aggregate_results = event_results[0]
-    aggregate_results = aggregate_results\
-        .clone()\
+    aggregate_results = aggregate_results \
+        .clone() \
         .rename({
-            'age_advantage_event_points': f'{events[0].to_string()}_points',
-        })\
+        'age_advantage_event_points': f'{events[0].to_string()}_points',
+    }) \
         .select('first_name', 'last_name', f'{events[0].to_string()}_points')
 
     for _ix, other in enumerate(event_results[1:]):
         ix = _ix + 1
         event = events[ix]
-        oc = other.select('first_name', 'last_name', 'age_advantage_event_points')\
+        oc = other.select('first_name', 'last_name', 'age_advantage_event_points') \
             .rename({'age_advantage_event_points': f'{event.to_string()}_points'})
         # we can expect the validation to eventually raise a problem
         joined = aggregate_results.join(oc, on=['first_name', 'last_name'], how='outer')
 
         # validate that we didn't get any multi-joins
         if not joined.n_unique(subset=['first_name', 'last_name']) == joined.shape[0]:
+            print(joined
+                  .groupby(['first_name', 'last_name'])
+                  .count()
+                  .filter(pl.col('count') > 1))
             raise ValueError('Data contained a many-1 join on names')
 
         aggregate_results = joined
@@ -116,11 +122,11 @@ def compute_total_individual_points(
         total_n_events.append(n_events)
         series_event_points.append(sum(heapq.nlargest(6, ind_event_points)))
 
-    aggregate_results = aggregate_results\
+    aggregate_results = aggregate_results \
         .with_columns(
-            pl.Series(name='n_events', values=total_n_events),
-            pl.Series(name='series_points', values=series_event_points)
-        )
+        pl.Series(name='n_events', values=total_n_events),
+        pl.Series(name='series_points', values=series_event_points)
+    )
 
     ar_with_ei = attach_event_incentives(aggregate_results)
     ar_with_ei = ar_with_ei.with_columns(
@@ -130,9 +136,9 @@ def compute_total_individual_points(
 
 
 def _compute_event_team_points_within_gender(
-    membership: pl.DataFrame,
-    points: pl.DataFrame,
-    e: Event,
+        membership: pl.DataFrame,
+        points: pl.DataFrame,
+        e: Event,
 ) -> pl.DataFrame:
     event_points_column = f'{e.to_string()}_points'
     joinable_points = points.select([event_points_column, 'first_name', 'last_name']).drop_nulls([event_points_column])
@@ -148,14 +154,14 @@ def _compute_event_team_points_within_gender(
 
     ranked = points_joined_membership.with_columns(
         pl.col(event_points_column)
-          .rank(method="ordinal", descending=True)
-          .over("team_name")
-          .alias("team_rank")
+        .rank(method="ordinal", descending=True)
+        .over("team_name")
+        .alias("team_rank")
     ).with_columns(
         pl.when(pl.col("team_rank") <= 3)
-          .then(pl.lit("Yes"))
-          .otherwise(pl.lit("No"))
-          .alias("is_scoring")
+        .then(pl.lit("Yes"))
+        .otherwise(pl.lit("No"))
+        .alias("is_scoring")
     ).with_columns(
         pl.lit(e.get_human_readable_name()).alias("event"),
     )
@@ -176,19 +182,19 @@ def _compute_event_team_points_within_gender(
         for x in points_joined_membership.partition_by('team_name')
     ])
 
-    team_scores = top_3_scorers_by_team\
-        .groupby('team_name')\
-        .agg(pl.col(event_points_column).sum().alias(event_points_column))\
+    team_scores = top_3_scorers_by_team \
+        .groupby('team_name') \
+        .agg(pl.col(event_points_column).sum().alias(event_points_column)) \
         .select('team_name', event_points_column)
 
     return EventTeamPointsResult(team_scores=team_scores, report=report_df)
 
 
 def compute_team_points(
-    membership: pl.DataFrame,
-    male_points: pl.DataFrame,
-    female_points: pl.DataFrame,
-    events: list[Event],
+        membership: pl.DataFrame,
+        male_points: pl.DataFrame,
+        female_points: pl.DataFrame,
+        events: list[Event],
 ) -> EventTeamPointsResult:
     gender_points_by_team = []
     report_dfs: list[pl.DataFrame] = []
@@ -211,8 +217,8 @@ def compute_team_points(
     team_points_report = pl.concat(report_dfs) if report_dfs else pl.DataFrame()
 
     magic_suffix = '_female'
-    gpbt_joined = gender_points_by_team[0]\
-        .join(gender_points_by_team[1], on='team_name', how='outer', suffix=magic_suffix)\
+    gpbt_joined = gender_points_by_team[0] \
+        .join(gender_points_by_team[1], on='team_name', how='outer', suffix=magic_suffix) \
         .fill_null(0)
     all_event_columns = []
     for e in events:
@@ -224,7 +230,7 @@ def compute_team_points(
         )
 
     final_scores = gpbt_joined \
-        .select(['team_name'] + all_event_columns)\
+        .select(['team_name'] + all_event_columns) \
         .with_columns(pl.sum_horizontal(all_event_columns).alias('total_points'))
 
     return EventTeamPointsResult(final_scores, team_points_report)
