@@ -6,7 +6,7 @@ import polars as pl
 
 from tdfio.const import Gender
 
-NAME_REGEX = r'(([A-Z][a-z]+( |-))+)([A-Z| |-]+)'
+NAME_REGEX = r'^(([A-Z][a-z]+( |-))+)([A-Z| |\-|\']+)$'
 AGE_CLASS_REGEX = r'([M|F]) ?([0-9]{1,3}) to ([0-9]{1,3}) \(.+\)'
 GENDER_ONLY_AGE_CLASS_REGEX = r'(Male|Female) \(.+\)'
 VARIABLE_UNBOUNDED_AGE_CLASS_REGEX = r'([M|F]) +([0-9]{2}).*'
@@ -14,8 +14,8 @@ VARIABLE_UNBOUNDED_AGE_CLASS_REGEX = r'([M|F]) +([0-9]{2}).*'
 
 def _name_capitalize(n: str) -> str:
     return " ".join(
-        part.capitalize() for part in n.strip().replace("-", " - ").split()
-    ).replace(" - ", "-")
+        part.capitalize() for part in n.strip().replace("-", " - ").replace("'", " ' ").split()
+    ).replace(" - ", "-").replace(" ' ", "'")
 
 
 def _parse_name(n: str) -> tuple[str, str]:
