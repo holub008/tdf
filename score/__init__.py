@@ -153,7 +153,11 @@ def _compute_event_team_points_within_gender(
         descending=[False, True]
     )
 
-    ranked = points_joined_membership.with_columns(
+    ranked = points_joined_membership.sort(
+        ["team_name", event_points_column, "last_name", "first_name"],
+        descending=[False, True, False, False],
+        nulls_last=True,
+    ).with_columns(
         pl.col(event_points_column)
         .rank(method="ordinal", descending=True)
         .over("team_name")
