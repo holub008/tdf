@@ -1,7 +1,7 @@
 import polars as pl
 from acquire.s2526.noquemanon import get_results
-from orchestrate.s2526 import NON_MAIN_EVENT_SPOOF, NON_MAIN_RACE_POINTS, Event
-from score import compute_event_points_with_age_advantage
+from orchestrate.s2526 import Event2526
+from score.event import NON_MAIN_RACE_POINTS, NON_MAIN_EVENT_SPOOF, compute_event_points_with_age_advantage
 from tdfio.const import Gender
 
 if __name__ == '__main__':
@@ -25,4 +25,4 @@ if __name__ == '__main__':
             nonmain_points
         ])
 
-        Event.noquemanon.save_df(all_event_points, gender)
+        Event2526.noquemanon.save_df(all_event_points, gender)

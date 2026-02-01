@@ -1,7 +1,7 @@
 import polars as pl
 from acquire.s2526.riverview import get_results
-from orchestrate.s2526 import NON_MAIN_EVENT_SPOOF, NON_MAIN_RACE_POINTS, Event
-from score import compute_event_points_with_age_advantage
+from orchestrate.s2526 import Event2526
+from score.event import NON_MAIN_RACE_POINTS, NON_MAIN_EVENT_SPOOF, compute_event_points_with_age_advantage
 from tdfio.const import Gender
 
 main_results = get_results(True)
@@ -24,4 +24,4 @@ for gender in [Gender.male, Gender.female]:
         nonmain_points
     ])
 
-    Event.riverview.save_df(all_event_points, gender)
+    Event2526.riverview.save_df(all_event_points, gender)

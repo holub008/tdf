@@ -2,10 +2,12 @@ import polars as pl
 from acquire.mtec import scrape_race
 
 MAIN_RACE_ID = 20099
-# prejudicially, classic events on Saturday (overlapped with Ashwabay) are not counted
 NONMAIN_RACE_IDS = [
     20100,  # skate puoli
     20101,  # skate tour
+    20097,  # classic marathon
+    20098,  # classic puoli
+    20105,  # classic tour
 ]
 
 

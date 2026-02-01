@@ -5,7 +5,6 @@ import polars as pl
 
 from acquire.assimilate import assimilate_raw_results
 from tdfio.const import Gender
-from tdfio.dao import RawResults
 
 MIXED_NAME_TO_GENDER = {
     'Alex Reich': 'male',
@@ -74,7 +73,7 @@ def stretch_relay_teams(wide_df: pl.DataFrame) -> pl.DataFrame:
     return pl.concat(out)
 
 
-def scrape_hiihto() -> RawResults:
+def scrape_hiihto():
     res = requests.get('https://www.endurancepromotions.com/ResultDetails.aspx',
                             params={'id': '1669'})
     soup = BeautifulSoup(res.text, 'html.parser')

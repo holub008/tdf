@@ -1,6 +1,7 @@
 import polars as pl
 from db.s2526 import load_results, load_standings
-from orchestrate.s2526 import Event, NON_MAIN_EVENT_SPOOF
+from orchestrate.s2526 import Event2526
+from score.event import NON_MAIN_EVENT_SPOOF
 from tdfio.const import Gender
 
 AGE_GROUPS = pl.DataFrame([
@@ -19,7 +20,7 @@ AGE_GROUPS = pl.DataFrame([
 
 def _build_ages(g: Gender) -> pl.DataFrame:
     events_with_age = []
-    for e in Event:
+    for e in Event2526:
         results_df = load_results(e, g)
 
         if 'age' in results_df:

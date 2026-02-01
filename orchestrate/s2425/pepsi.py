@@ -1,6 +1,6 @@
 from acquire.s2425.pepsi import get_results
 from orchestrate.s2425 import Event, NON_MAIN_RACE_POINTS, NON_MAIN_EVENT_SPOOF
-from score import compute_event_points_with_age_advantage
+from score.event import compute_event_points_with_age_advantage
 from tdfio.const import Gender
 import polars as pl
 

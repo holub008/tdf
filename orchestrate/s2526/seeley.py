@@ -1,9 +1,9 @@
 import polars as pl
 
 from acquire.s2526.seeley import get_results
-from orchestrate.s2526 import Event, NON_MAIN_EVENT_SPOOF, NON_MAIN_RACE_POINTS
+from orchestrate.s2526 import Event2526
+from score.event import NON_MAIN_RACE_POINTS, NON_MAIN_EVENT_SPOOF, compute_event_points_with_age_advantage
 from tdfio.const import Gender
-from score import compute_event_points_with_age_advantage
 
 
 if __name__ == '__main__':
@@ -27,4 +27,4 @@ if __name__ == '__main__':
             nonmain_points
         ])
 
-        Event.seeley.save_df(all_event_points, gender)
+        Event2526.seeley.save_df(all_event_points, gender)
