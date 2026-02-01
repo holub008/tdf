@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
 import polars as pl
-# this import needs to be updated every season. Needs some abstraction
 from tdfio.const import Event
 from tdfio.const import Gender
 
