@@ -5,7 +5,7 @@ from orchestrate.s2526 import Event
 from score import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
 
-EVENTS_TO_SCORE = [Event.bcfk, Event.seeley, Event.riverview, Event.noquemanon]
+EVENTS_TO_SCORE = [Event.bcfk, Event.seeley, Event.riverview, Event.noquemanon, Event.ashwabay]
 
 SCORER_BIAS = pl.DataFrame([['Karl', 'Holub', -10]], schema=['first_name', 'last_name', 'bias_adjustment'])
 

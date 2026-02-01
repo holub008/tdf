@@ -9,6 +9,7 @@ class Event(Enum):
     seeley = "Seeley Hills Classic"
     riverview = "Riverview Loppet"
     noquemanon = "Noquemanon"
+    ashwabay = 'Mt. Ashwabay Summit Ski Race'
 
     def to_string(self) -> str:
         return self.name
