@@ -10,6 +10,7 @@ class Event(Enum):
     riverview = "Riverview Loppet"
     noquemanon = "Noquemanon"
     ashwabay = 'Mt. Ashwabay Summit Ski Race'
+    coll = 'City of Lakes Loppet'
 
     def to_string(self) -> str:
         return self.name
