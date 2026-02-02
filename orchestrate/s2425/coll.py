@@ -2,7 +2,7 @@ import polars as pl
 import acquire.mtec as mtec
 from orchestrate.s2425 import Event
 from orchestrate.s2425 import NON_MAIN_EVENT_SPOOF, NON_MAIN_RACE_POINTS
-from score import compute_event_points_with_age_advantage
+from score.event import compute_event_points_with_age_advantage
 from tdfio.const import Gender
 
 MAIN_RACE_ID = 18267

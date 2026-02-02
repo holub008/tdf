@@ -3,7 +3,6 @@ from nameparser import HumanName
 import pytimeparse
 
 from tdfio.const import Gender
-from tdfio.dao import RawResults
 
 
 def _extract_name_parts(full_name: str) -> tuple:
@@ -53,7 +52,7 @@ def _assimilate_gender(df: pl.DataFrame) -> pl.DataFrame:
                            .alias("gender"))
 
 
-def assimilate_raw_results(df: pl.DataFrame) -> RawResults:
+def assimilate_raw_results(df: pl.DataFrame):
     with_name_parts = _attach_name_parts(df)
     with_numerics = _coerce_numerics(with_name_parts)
     with_gender = _assimilate_gender(with_numerics)

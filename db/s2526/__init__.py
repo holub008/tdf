@@ -3,17 +3,17 @@ from typing import Optional
 
 import polars as pl
 
-from orchestrate.s2526 import Event
+from orchestrate.s2526 import Event2526
 from tdfio.const import Gender
 
 
-def load_results(e: Event, g: Gender) -> Optional[pl.DataFrame]:
+def load_results(e: Event2526, g: Gender) -> Optional[pl.DataFrame]:
     fp = f'db/s2526/{e.to_string()}_{g.to_string()}.csv'
     if os.path.exists(fp):
         return pl.read_csv(f'db/s2526/{e.to_string()}_{g.to_string()}.csv')
-    else:
+    elif g != Gender.nb:
         print(f'Skipping over missing file: {fp}')
-        return None
+    return None
 
 
 def load_standings(g: Gender):

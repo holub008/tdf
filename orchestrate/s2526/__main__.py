@@ -1,11 +1,11 @@
 import polars as pl
 from db.s2526 import load_results, load_team_membership
 from db.namequality import perform_alias_quality_check
-from orchestrate.s2526 import Event
-from score import compute_total_individual_points, compute_team_points
+from orchestrate.s2526 import Event2526
+from score.season import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
 
-EVENTS_TO_SCORE = [Event.bcfk, Event.seeley, Event.riverview, Event.noquemanon]
+EVENTS_TO_SCORE = [Event2526.bcfk, Event2526.seeley, Event2526.riverview, Event2526.noquemanon, Event2526.ashwabay, Event2526.coll]
 
 SCORER_BIAS = pl.DataFrame([['Karl', 'Holub', -10]], schema=['first_name', 'last_name', 'bias_adjustment'])
 

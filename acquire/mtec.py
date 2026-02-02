@@ -3,7 +3,6 @@ import polars as pl
 from bs4 import BeautifulSoup
 
 from acquire.assimilate import assimilate_raw_results
-from tdfio.dao import RawResults
 
 
 def _attach_gender_place(df: pl.DataFrame) -> pl.DataFrame:
@@ -12,7 +11,7 @@ def _attach_gender_place(df: pl.DataFrame) -> pl.DataFrame:
     )
 
 
-def scrape_race(race_id: int) -> RawResults:
+def scrape_race(race_id: int):
     all_rows = []
     header = None
     offset = 0

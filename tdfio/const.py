@@ -1,4 +1,8 @@
+from abc import ABC, abstractmethod
 from enum import Enum, auto
+from typing import Optional
+
+import polars as pl
 
 
 class Technique(Enum):
@@ -20,17 +24,6 @@ class Gender(Enum):
     female = auto()
     nb = auto()
 
-    @staticmethod
-    def from_string(s: str):
-        if s == 'male':
-            return Gender.MALE
-        elif s == 'female':
-            return Gender.FEMALE
-        elif s == 'nb':
-            return Gender.NB
-        else:
-            raise ValueError(f'Unrecognized gender {s}')
-
     def to_string(self):
         """
         deprecated
@@ -44,3 +37,24 @@ class Gender(Enum):
 
     def __str__(self) -> str:
         return self.to_string()
+
+
+class Event(Enum):
+    """
+    an interface for events, to be used in our logic modules.
+    create a new Event enum with each season (TdF events rotate season to season)
+
+    This class would ideally be an ABC, but Python OOP doesn't jive with that.
+    """
+
+    def to_string(self) -> str:
+        raise NotImplementedError
+
+    def get_human_readable_name(self) -> str:
+        raise NotImplementedError
+
+    def get_event_days(self) -> Optional[int]:
+        raise NotImplementedError
+
+    def save_df(self, df: pl.DataFrame, g: Gender):
+        raise NotImplementedError
