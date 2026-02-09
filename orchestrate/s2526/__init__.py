@@ -10,6 +10,7 @@ class Event2526(Event):
     noquemanon = ("Noquemanon", 1)
     ashwabay = ("Mt. Ashwabay Summit Ski Race", 1)
     coll = ("City of Lakes Loppet", 2)
+    vasa = ("Vasaloppet USA", 2)
 
     def to_string(self) -> str:
         return self.name
