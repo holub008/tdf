@@ -6,7 +6,7 @@ from score.season import compute_total_individual_points, compute_team_points
 from tdfio.const import Gender
 
 EVENTS_TO_SCORE = [Event2526.bcfk, Event2526.seeley, Event2526.riverview, Event2526.noquemanon, Event2526.ashwabay,
-                   Event2526.coll, Event2526.vasa]
+                   Event2526.coll, Event2526.vasa, Event2526.finlandia]
 
 SCORER_BIAS = pl.DataFrame([['Karl', 'Holub', -10]], schema=['first_name', 'last_name', 'bias_adjustment'])
 
