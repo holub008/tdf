@@ -1,6 +1,6 @@
 gender_place,first_name,last_name,age,age_advantage_event_points
 1,Nicholas,Youso,22,100.0
-1,Mitch,Campbell,33,100.0
+1,Mitchell,Campbell,33,100.0
 9,David,Harrington,66,98.14285714285715
 2,Eli,Rassler,32,97.14285714285714
 2,Craig,Cardinal,43,97.14285714285714
@@ -17,7 +17,7 @@ gender_place,first_name,last_name,age,age_advantage_event_points
 7,Matthew,Bischof,42,82.85714285714285
 17,Jonathan,Schupp,71,80.28571428571429
 8,Jack,Martin,16,80.0
-9,Ryan,Rogers,46,78.14285714285715
+9,Ryan,Rogers(46/Bemidji),46,78.14285714285715
 10,Carl,Graefe,32,74.28571428571429
 10,Erik,Pieh,42,74.28571428571429
 11,Brett,Arenz,46,72.42857142857143
