@@ -12,6 +12,7 @@ class Event2526(Event):
     coll = ("City of Lakes Loppet", 2)
     vasa = ("Vasaloppet USA", 2)
     finlandia = ("Finlandia", 1)
+    pepsi = ("Pepsi Challenge", 1)
 
     def to_string(self) -> str:
         return self.name

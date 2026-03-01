@@ -22,6 +22,7 @@ Finnish Postal Service,Mt. Ashwabay Summit Ski Race,female,Molly,Watkins,1,69.57
 Finnish Postal Service,Mt. Ashwabay Summit Ski Race,female,Rebecca,Kolstad,2,39.13,Yes
 Finnish Postal Service,Mt. Ashwabay Summit Ski Race,male,Karl,Holub,1,90.7,Yes
 Finnish Postal Service,Mt. Ashwabay Summit Ski Race,male,Nate,Rhode,2,81.4,Yes
+Finnish Postal Service,Pepsi Challenge,female,Molly,Watkins,1,75.0,Yes
 Finnish Postal Service,Riverview Loppet,male,Karl,Holub,1,76.27,Yes
 Finnish Postal Service,Riverview Loppet,male,Nate,Rhode,2,22.03,Yes
 Finnish Postal Service,Seeley Hills Classic,female,Molly,Watkins,1,20.0,Yes
@@ -48,6 +49,7 @@ Flying Fungi of Yuggoth,Mt. Ashwabay Summit Ski Race,female,Katie,Schaaf,2,20.0,
 Flying Fungi of Yuggoth,Mt. Ashwabay Summit Ski Race,female,Kira,Stolen,3,20.0,Yes
 Flying Fungi of Yuggoth,Mt. Ashwabay Summit Ski Race,male,Kevin,Johnson,1,75.42,Yes
 Flying Fungi of Yuggoth,Mt. Ashwabay Summit Ski Race,male,Craig,Stolen,2,66.81,Yes
+Flying Fungi of Yuggoth,Pepsi Challenge,male,Fred,Kueffer,1,20.0,Yes
 Flying Fungi of Yuggoth,Riverview Loppet,female,Allie,Rykken,1,57.14,Yes
 Flying Fungi of Yuggoth,Riverview Loppet,male,Kevin,Johnson,1,58.63,Yes
 Flying Fungi of Yuggoth,Seeley Hills Classic,female,Allie,Rykken,1,95.89,Yes
@@ -67,6 +69,8 @@ Hoigaards/Breadsmith A Team,City of Lakes Loppet,male,John,Rock,4,20.0,No
 Hoigaards/Breadsmith A Team,Finlandia,male,Travis,Hinck,1,91.43,Yes
 Hoigaards/Breadsmith A Team,Noquemanon,female,Nicole,Eliasson,1,20.0,Yes
 Hoigaards/Breadsmith A Team,Noquemanon,male,John,Rock,1,20.0,Yes
+Hoigaards/Breadsmith A Team,Pepsi Challenge,female,Michelle,Hatch,1,56.25,Yes
+Hoigaards/Breadsmith A Team,Pepsi Challenge,male,Anders,Sonnesyn,1,20.0,Yes
 Hoigaards/Breadsmith A Team,Riverview Loppet,female,Kaitsy,Baker,1,71.43,Yes
 Hoigaards/Breadsmith A Team,Riverview Loppet,female,Michelle,Hatch,2,35.71,Yes
 Hoigaards/Breadsmith A Team,Seeley Hills Classic,female,Victoria,Ranua,1,69.86,Yes
@@ -95,6 +99,9 @@ Ski EU Later,City of Lakes Loppet,male,Joseph,Altendahl,3,67.54,Yes
 Ski EU Later,City of Lakes Loppet,male,Paul,Earl-Torniainen,4,42.29,No
 Ski EU Later,Mt. Ashwabay Summit Ski Race,female,Molly,Schaus,1,34.78,Yes
 Ski EU Later,Noquemanon,male,Ron,Omann,1,86.79,Yes
+Ski EU Later,Pepsi Challenge,male,Ron,Omann,1,91.76,Yes
+Ski EU Later,Pepsi Challenge,male,Ryan,Soule,2,69.12,Yes
+Ski EU Later,Pepsi Challenge,male,Paul,Earl-Torniainen,3,48.82,Yes
 Ski EU Later,Riverview Loppet,male,Ron,Omann,1,77.88,Yes
 Ski EU Later,Seeley Hills Classic,female,Julie,Rieth,1,82.97,Yes
 Ski EU Later,Seeley Hills Classic,female,Patty,Carlen,2,20.0,Yes
@@ -144,6 +151,11 @@ TCSC Icy Insurgents,Noquemanon,female,Julia,Lavanger,1,64.29,Yes
 TCSC Icy Insurgents,Noquemanon,female,Katrin,O'Grady,2,20.0,Yes
 TCSC Icy Insurgents,Noquemanon,male,Chris,Frenier,1,84.04,Yes
 TCSC Icy Insurgents,Noquemanon,male,Mitchell,Campbell,2,20.0,Yes
+TCSC Icy Insurgents,Pepsi Challenge,female,Kathryn,Pintar,1,90.63,Yes
+TCSC Icy Insurgents,Pepsi Challenge,female,Julia,Reich,2,84.38,Yes
+TCSC Icy Insurgents,Pepsi Challenge,male,Mitchell,Campbell,1,100.0,Yes
+TCSC Icy Insurgents,Pepsi Challenge,male,Ryan,Rogers,2,98.53,Yes
+TCSC Icy Insurgents,Pepsi Challenge,male,Michael,Garlinghouse,3,75.0,Yes
 TCSC Icy Insurgents,Riverview Loppet,female,Kathryn,Pintar,1,92.86,Yes
 TCSC Icy Insurgents,Riverview Loppet,female,Julia,Reich,2,78.57,Yes
 TCSC Icy Insurgents,Riverview Loppet,male,Ryan,Rogers,1,100.0,Yes
@@ -182,6 +194,11 @@ Vakava Juniorit,Noquemanon,female,Laura,Cattaneo,1,85.71,Yes
 Vakava Juniorit,Noquemanon,male,Josh,Albrecht,1,94.68,Yes
 Vakava Juniorit,Noquemanon,male,Sam,Shaheen,2,87.23,Yes
 Vakava Juniorit,Noquemanon,male,Ian,Wright,3,78.72,Yes
+Vakava Juniorit,Pepsi Challenge,female,Gabby,Vandendries,1,100.0,Yes
+Vakava Juniorit,Pepsi Challenge,female,Laura,Cattaneo,2,96.88,Yes
+Vakava Juniorit,Pepsi Challenge,male,Josh,Albrecht,1,97.06,Yes
+Vakava Juniorit,Pepsi Challenge,male,Ian,Wright,2,95.59,Yes
+Vakava Juniorit,Pepsi Challenge,male,Sam,Shaheen,3,20.0,Yes
 Vakava Juniorit,Riverview Loppet,male,Ian,Wright,1,71.19,Yes
 Vakava Juniorit,Riverview Loppet,male,McEwan,Rodefeld,2,69.49,Yes
 Vakava Juniorit,Riverview Loppet,male,Leif,Hanson,3,20.0,Yes
@@ -213,6 +230,10 @@ Vakava Seniorit,Mt. Ashwabay Summit Ski Race,male,Craig,Cardinal,1,86.05,Yes
 Vakava Seniorit,Mt. Ashwabay Summit Ski Race,male,Erik,Pieh,2,62.79,Yes
 Vakava Seniorit,Noquemanon,male,Brock,Lundberg,1,74.02,Yes
 Vakava Seniorit,Noquemanon,male,Ben,Mullin,2,65.83,Yes
+Vakava Seniorit,Pepsi Challenge,female,Elspeth,Ronnander,1,68.75,Yes
+Vakava Seniorit,Pepsi Challenge,male,Craig,Cardinal,1,91.18,Yes
+Vakava Seniorit,Pepsi Challenge,male,Artie,Huber,2,81.47,Yes
+Vakava Seniorit,Pepsi Challenge,male,Erik,Pieh,3,64.71,Yes
 Vakava Seniorit,Riverview Loppet,female,Marybeth,Tuttle,1,100.0,Yes
 Vakava Seniorit,Riverview Loppet,female,Elspeth,Ronnander,2,64.29,Yes
 Vakava Seniorit,Riverview Loppet,female,Eva,Reinicke,3,28.57,Yes
@@ -245,6 +266,10 @@ Yamageddon,City of Lakes Loppet,male,Louis,Sirota,2,85.09,Yes
 Yamageddon,City of Lakes Loppet,male,Josh,Doebbert,3,81.87,Yes
 Yamageddon,City of Lakes Loppet,male,Erik,Hendrickson,4,79.24,No
 Yamageddon,City of Lakes Loppet,male,Colin,Wadsworth,5,59.06,No
+Yamageddon,Pepsi Challenge,female,Julie,Garretson,1,20.0,Yes
+Yamageddon,Pepsi Challenge,male,Louis,Sirota,1,89.71,Yes
+Yamageddon,Pepsi Challenge,male,Erik,Hendrickson,2,20.0,Yes
+Yamageddon,Pepsi Challenge,male,Andrew,Tilman,3,20.0,Yes
 Yamageddon,Riverview Loppet,male,Andrew,Tilman,1,94.92,Yes
 Yamageddon,Seeley Hills Classic,female,Julie,Garretson,1,94.52,Yes
 Yamageddon,Seeley Hills Classic,female,Ana,Zembryki,2,67.12,Yes
