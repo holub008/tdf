@@ -147,7 +147,6 @@ def _compute_event_team_points_within_gender(
         "is_scoring",
     ])
 
-    print
     top_3_scorers_by_team = pl.concat([
         x.top_k(3, by=event_points_column)
         for x in points_joined_membership.partition_by('team_name')
