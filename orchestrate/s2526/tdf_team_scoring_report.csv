@@ -5,6 +5,8 @@ Casual Elite,City of Lakes Loppet,male,Dave,Niday,1,20.0,Yes
 Casual Elite,City of Lakes Loppet,male,Will,Nielsen,2,20.0,Yes
 Casual Elite,Riverview Loppet,male,Dave,Niday,1,64.41,Yes
 Casual Elite,Seeley Hills Classic,male,Dave,Niday,1,20.0,Yes
+Casual Elite,Ski the North,male,Will,Nielsen,1,55.32,Yes
+Casual Elite,Ski the North,male,Dave,Niday,2,38.3,Yes
 Casual Elite,Vasaloppet USA,male,Dave,Niday,1,69.83,Yes
 Des Moines Lake Nordic Ski Team,City of Lakes Loppet,male,Adam,Burnett,1,20.0,Yes
 Des Moines Lake Nordic Ski Team,City of Lakes Loppet,male,Jeff,Markes,2,20.0,Yes
@@ -28,6 +30,11 @@ Finnish Postal Service,Riverview Loppet,male,Nate,Rhode,2,22.03,Yes
 Finnish Postal Service,Seeley Hills Classic,female,Molly,Watkins,1,20.0,Yes
 Finnish Postal Service,Seeley Hills Classic,male,Karl,Holub,1,98.03,Yes
 Finnish Postal Service,Seeley Hills Classic,male,Spencer,Davis,2,95.39,Yes
+Finnish Postal Service,Ski the North,female,Molly,Watkins,1,81.25,Yes
+Finnish Postal Service,Ski the North,female,Rebecca,Kolstad,2,20.0,Yes
+Finnish Postal Service,Ski the North,male,Karl,Holub,1,97.87,Yes
+Finnish Postal Service,Ski the North,male,Tyler,Gilbert,2,65.96,Yes
+Finnish Postal Service,Ski the North,male,Nate,Rhode,3,63.83,Yes
 Finnish Postal Service,Vasaloppet USA,female,Molly,Watkins,1,82.14,Yes
 Finnish Postal Service,Vasaloppet USA,female,Rebecca,Kolstad,2,57.14,Yes
 Finnish Postal Service,Vasaloppet USA,male,Karl,Holub,1,87.07,Yes
@@ -55,6 +62,10 @@ Flying Fungi of Yuggoth,Riverview Loppet,male,Kevin,Johnson,1,58.63,Yes
 Flying Fungi of Yuggoth,Seeley Hills Classic,female,Allie,Rykken,1,95.89,Yes
 Flying Fungi of Yuggoth,Seeley Hills Classic,female,Emily,Broderson,2,63.27,Yes
 Flying Fungi of Yuggoth,Seeley Hills Classic,male,Kevin,Johnson,1,95.74,Yes
+Flying Fungi of Yuggoth,Ski the North,male,Craig,Stolen,1,45.04,Yes
+Flying Fungi of Yuggoth,Ski the North,male,Devin,Arenz,2,23.0,Yes
+Flying Fungi of Yuggoth,Ski the North,male,Brett,Arenz,3,21.0,Yes
+Flying Fungi of Yuggoth,Ski the North,male,Kevin,Johnson,4,20.0,No
 Flying Fungi of Yuggoth,Vasaloppet USA,female,Emily,Broderson,1,33.57,Yes
 Flying Fungi of Yuggoth,Vasaloppet USA,female,Kira,Stolen,2,20.0,Yes
 Flying Fungi of Yuggoth,Vasaloppet USA,male,Brett,Arenz,1,88.62,Yes
@@ -85,6 +96,8 @@ Hoigaards/Breadsmith A Team,Vasaloppet USA,male,Paul,Schoening,2,56.38,Yes
 Hoigaards/Breadsmith B Team,City of Lakes Loppet,male,Steve,Eberly,1,64.71,Yes
 Hoigaards/Breadsmith B Team,Mt. Ashwabay Summit Ski Race,female,Geneva,Finn,1,31.43,Yes
 Hoigaards/Breadsmith B Team,Mt. Ashwabay Summit Ski Race,male,Jason,Dalebroux,1,20.0,Yes
+Hoigaards/Breadsmith B Team,Ski the North,female,Geneva,Finn,1,44.75,Yes
+Hoigaards/Breadsmith B Team,Ski the North,male,Jason,Dalebroux,1,20.0,Yes
 Ski EU Later,Battle Creek Fifty K,female,Julie,Rieth,1,44.29,Yes
 Ski EU Later,Battle Creek Fifty K,female,Sarah,Richter,2,41.18,Yes
 Ski EU Later,Battle Creek Fifty K,female,Molly,Schaus,3,38.24,Yes
@@ -167,6 +180,8 @@ TCSC Icy Insurgents,Seeley Hills Classic,female,Julia,Lavanger,1,93.15,Yes
 TCSC Icy Insurgents,Seeley Hills Classic,female,Kathryn,Pintar,2,89.04,Yes
 TCSC Icy Insurgents,Seeley Hills Classic,female,Daisy,Richmond,3,20.0,Yes
 TCSC Icy Insurgents,Seeley Hills Classic,male,Chad,Korby,1,96.71,Yes
+TCSC Icy Insurgents,Ski the North,female,Julia,Lavanger,1,50.0,Yes
+TCSC Icy Insurgents,Ski the North,male,Ryan,Rogers,1,95.74,Yes
 TCSC Icy Insurgents,Vasaloppet USA,female,Katrin,O'Grady,1,20.0,Yes
 TCSC Icy Insurgents,Vasaloppet USA,female,Kathryn,Pintar,2,20.0,Yes
 TCSC Icy Insurgents,Vasaloppet USA,female,Daisy,Richmond,3,20.0,Yes
@@ -244,6 +259,11 @@ Vakava Seniorit,Riverview Loppet,male,Brock,Lundberg,3,45.68,Yes
 Vakava Seniorit,Seeley Hills Classic,female,Eva,Reinicke,1,75.34,Yes
 Vakava Seniorit,Seeley Hills Classic,male,Artie,Huber,1,94.16,Yes
 Vakava Seniorit,Seeley Hills Classic,male,Ben,Mullin,2,92.45,Yes
+Vakava Seniorit,Ski the North,female,Elspeth,Ronnander,1,68.75,Yes
+Vakava Seniorit,Ski the North,male,Craig,Cardinal,1,91.49,Yes
+Vakava Seniorit,Ski the North,male,Brock,Lundberg,2,87.98,Yes
+Vakava Seniorit,Ski the North,male,Erik,Pieh,3,61.7,Yes
+Vakava Seniorit,Ski the North,male,Ben,Mullin,4,49.94,No
 Vakava Seniorit,Vasaloppet USA,female,Elspeth,Ronnander,1,85.71,Yes
 Vakava Seniorit,Vasaloppet USA,female,Eva,Reinicke,2,64.29,Yes
 Vakava Seniorit,Vasaloppet USA,female,Maria,Schilling,3,47.86,Yes
@@ -278,6 +298,7 @@ Yamageddon,Seeley Hills Classic,male,Josh,Doebbert,1,88.82,Yes
 Yamageddon,Seeley Hills Classic,male,Erik,Hendrickson,2,20.0,Yes
 Yamageddon,Seeley Hills Classic,male,Louis,Sirota,3,20.0,Yes
 Yamageddon,Seeley Hills Classic,male,Andrew,Tilman,4,20.0,No
+Yamageddon,Ski the North,male,Louis,Sirota,1,87.23,Yes
 Yamageddon,Vasaloppet USA,female,Alissa,Johnson,1,75.0,Yes
 Yamageddon,Vasaloppet USA,female,Julie,Garretson,2,71.43,Yes
 Yamageddon,Vasaloppet USA,female,Daria,Terenteva,3,20.0,Yes

@@ -13,6 +13,7 @@ class Event2526(Event):
     vasa = ("Vasaloppet USA", 2)
     finlandia = ("Finlandia", 1)
     pepsi = ("Pepsi Challenge", 1)
+    snu = ("Ski the North", 1)
 
     def to_string(self) -> str:
         return self.name
