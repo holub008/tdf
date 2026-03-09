@@ -78,6 +78,7 @@ Hoigaards/Breadsmith A Team,City of Lakes Loppet,male,Travis,Hinck,2,76.9,Yes
 Hoigaards/Breadsmith A Team,City of Lakes Loppet,male,Rick,Pike,3,20.0,Yes
 Hoigaards/Breadsmith A Team,City of Lakes Loppet,male,John,Rock,4,20.0,No
 Hoigaards/Breadsmith A Team,Finlandia,male,Travis,Hinck,1,91.43,Yes
+Hoigaards/Breadsmith A Team,Great Bear Chase,female,Michelle,Hatch,1,37.5,Yes
 Hoigaards/Breadsmith A Team,Noquemanon,female,Nicole,Eliasson,1,20.0,Yes
 Hoigaards/Breadsmith A Team,Noquemanon,male,John,Rock,1,20.0,Yes
 Hoigaards/Breadsmith A Team,Pepsi Challenge,female,Michelle,Hatch,1,56.25,Yes
@@ -128,12 +129,15 @@ Ski EU Later,Vasaloppet USA,male,Ron,Omann,1,87.76,Yes
 Ski EU Later,Vasaloppet USA,male,Joseph,Altendahl,2,79.31,Yes
 Snowbra Kai Academy,Battle Creek Fifty K,male,Dennis,Curran,1,84.0,Yes
 Snowbra Kai Academy,Battle Creek Fifty K,male,Scott,Bjorn Cummings,2,29.0,Yes
+Snowbra Kai Academy,Great Bear Chase,male,Scott,Bjorn Cummings,1,20.0,Yes
 Snowbra Kai Academy,Vasaloppet USA,male,Dennis,Curran,1,20.0,Yes
 TCSC Frosty Fliers,Battle Creek Fifty K,male,Joe,Harrington,1,93.0,Yes
 TCSC Frosty Fliers,Battle Creek Fifty K,male,Steven,Deckert,2,32.0,Yes
 TCSC Frosty Fliers,City of Lakes Loppet,male,Nathan,Orf,1,94.44,Yes
 TCSC Frosty Fliers,City of Lakes Loppet,male,Emmett,Donohue,2,92.98,Yes
 TCSC Frosty Fliers,City of Lakes Loppet,male,Joe,Harrington,3,87.72,Yes
+TCSC Frosty Fliers,Great Bear Chase,female,Audrey,Russell,1,20.0,Yes
+TCSC Frosty Fliers,Great Bear Chase,male,Joe,Harrington,1,93.18,Yes
 TCSC Frosty Fliers,Noquemanon,male,Nathan,Orf,1,20.0,Yes
 TCSC Frosty Fliers,Riverview Loppet,male,Joe,Harrington,1,91.53,Yes
 TCSC Frosty Fliers,Riverview Loppet,male,Emmett,Donohue,2,86.44,Yes
@@ -155,6 +159,10 @@ TCSC Icy Insurgents,City of Lakes Loppet,male,Chris,Frenier,4,78.65,No
 TCSC Icy Insurgents,Finlandia,female,Kathryn,Pintar,1,100.0,Yes
 TCSC Icy Insurgents,Finlandia,male,Mitchell,Campbell,1,100.0,Yes
 TCSC Icy Insurgents,Finlandia,male,Chris,Frenier,2,94.29,Yes
+TCSC Icy Insurgents,Great Bear Chase,female,Daisy,Richmond,1,75.0,Yes
+TCSC Icy Insurgents,Great Bear Chase,female,Katrin,O'Grady,2,50.0,Yes
+TCSC Icy Insurgents,Great Bear Chase,male,Mitchell,Campbell,1,100.0,Yes
+TCSC Icy Insurgents,Great Bear Chase,male,Chris,Frenier,2,47.73,Yes
 TCSC Icy Insurgents,Mt. Ashwabay Summit Ski Race,female,Julia,Reich,1,95.65,Yes
 TCSC Icy Insurgents,Mt. Ashwabay Summit Ski Race,female,Julia,Lavanger,2,82.61,Yes
 TCSC Icy Insurgents,Mt. Ashwabay Summit Ski Race,male,Mitchell,Campbell,1,100.0,Yes
@@ -201,6 +209,9 @@ Vakava Juniorit,City of Lakes Loppet,male,Ian,Wright,3,87.43,Yes
 Vakava Juniorit,City of Lakes Loppet,male,Leif,Hanson,4,20.0,No
 Vakava Juniorit,Finlandia,female,Laura,Cattaneo,1,100.0,Yes
 Vakava Juniorit,Finlandia,male,Ian,Wright,1,94.29,Yes
+Vakava Juniorit,Great Bear Chase,female,Bonnie,Weiskopf,1,20.0,Yes
+Vakava Juniorit,Great Bear Chase,male,Sam,Shaheen,1,98.86,Yes
+Vakava Juniorit,Great Bear Chase,male,Josh,Albrecht,2,97.73,Yes
 Vakava Juniorit,Mt. Ashwabay Summit Ski Race,female,Laura,Cattaneo,1,100.0,Yes
 Vakava Juniorit,Mt. Ashwabay Summit Ski Race,female,Elena,Cattaneo,2,78.26,Yes
 Vakava Juniorit,Mt. Ashwabay Summit Ski Race,female,Bonnie,Weiskopf,3,68.52,Yes
@@ -238,6 +249,8 @@ Vakava Seniorit,City of Lakes Loppet,male,Brock,Lundberg,1,73.71,Yes
 Vakava Seniorit,Finlandia,female,Elspeth,Ronnander,1,92.31,Yes
 Vakava Seniorit,Finlandia,male,Craig,Cardinal,1,97.14,Yes
 Vakava Seniorit,Finlandia,male,Erik,Pieh,2,74.29,Yes
+Vakava Seniorit,Great Bear Chase,female,Marybeth,Tuttle,1,98.25,Yes
+Vakava Seniorit,Great Bear Chase,male,Artie,Huber,1,20.0,Yes
 Vakava Seniorit,Mt. Ashwabay Summit Ski Race,female,Adrienne,Keller,1,91.3,Yes
 Vakava Seniorit,Mt. Ashwabay Summit Ski Race,female,Elspeth,Ronnander,2,65.22,Yes
 Vakava Seniorit,Mt. Ashwabay Summit Ski Race,female,Eva,Reinicke,3,21.74,Yes
@@ -287,6 +300,7 @@ Yamageddon,City of Lakes Loppet,male,Louis,Sirota,2,85.09,Yes
 Yamageddon,City of Lakes Loppet,male,Josh,Doebbert,3,81.87,Yes
 Yamageddon,City of Lakes Loppet,male,Erik,Hendrickson,4,79.24,No
 Yamageddon,City of Lakes Loppet,male,Colin,Wadsworth,5,59.06,No
+Yamageddon,Great Bear Chase,male,Andrew,Tilman,1,20.0,Yes
 Yamageddon,Pepsi Challenge,female,Julie,Garretson,1,20.0,Yes
 Yamageddon,Pepsi Challenge,male,Louis,Sirota,1,89.71,Yes
 Yamageddon,Pepsi Challenge,male,Erik,Hendrickson,2,20.0,Yes

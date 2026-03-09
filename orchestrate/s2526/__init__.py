@@ -14,6 +14,7 @@ class Event2526(Event):
     finlandia = ("Finlandia", 1)
     pepsi = ("Pepsi Challenge", 1)
     snu = ("Ski the North", 1)
+    gbc = ("Great Bear Chase", 1)
 
     def to_string(self) -> str:
         return self.name
